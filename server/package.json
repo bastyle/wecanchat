@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "como313 group project wecanchat real time chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "realtime",
+    "centennial",
+    "como313"
+  ],
+  "author": "bastian bastias",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
