@@ -26,6 +26,7 @@ module.exports.login = async (req, res, next) => {
 
 
   module.exports.register = async (req, res, next) => {
+    console.log("register endpoint...")
     try {
       const { username, email, password } = req.body;
       const usernameCheck = await User.findOne({ username });

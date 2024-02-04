@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require("cors")
 require('dotenv').config()
 const { default: mongoose } = require('mongoose')
-const UserModel = require('./model/userModel')
+const userRoutes = require("./routes/userRoutes");
+//const UserModel = require('./model/userModel')
 
 
 const app = express()
@@ -32,6 +33,8 @@ app.get("/api/health", (req, res) => {
     console.log("health endpoint...")
     res.json({ "msg": "OK" })
   })
+
+app.use("/api/auth", userRoutes);  
 
 const server = app.listen(process.env.PORT, () =>
   console.log("server started on port: " + process.env.PORT + " ...")
