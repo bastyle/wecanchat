@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 module.exports.login = async (req, res, next) => {
     try {
+      console.log("login endpoint...")
       const { username, password } = req.body;
       const user = await User.findOne({ username });
       console.log("user??: "+user)
@@ -16,8 +17,10 @@ module.exports.login = async (req, res, next) => {
           console.log("Incorrect Password")
           return res.json({ msg: "Incorrect Username or Password", status: false });
       }
-        
+      console.log(user)
       delete user.password;
+      let { ['password']:_, ...refUser } = user;
+      console.log(refUser)
       return res.json({ status: true, user });
     } catch (ex) {
       next(ex);
