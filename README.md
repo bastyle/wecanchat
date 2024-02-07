@@ -1,5 +1,6 @@
 # WeCanChat (comp313-group-project)
-chat in real time application
+
+## chat in real time application
 
 ## server side (backend)
 server folder contains nodeJS code for the backend
