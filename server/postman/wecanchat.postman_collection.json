@@ -30,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"username\":\"test1\",\r\n   \"email\": \"test1@test.cl\",\r\n   \"password\":\"test1234\"\r\n}",
+					"raw": "{\r\n   \"username\":\"test2\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,6 +72,43 @@
 					"path": [
 						"auth",
 						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allusers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/allusers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"allusers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/user/65bfc7af84ef0ccd2c868c06",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"user",
+						"65bfc7af84ef0ccd2c868c06"
 					]
 				}
 			},
