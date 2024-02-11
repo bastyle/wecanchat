@@ -1,5 +1,6 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
+const EmailSender = require("../utils/emailSender");
 
 
 module.exports.login = async (req, res, next) => {
@@ -45,7 +46,10 @@ module.exports.login = async (req, res, next) => {
         password: hashedPassword,
       });
       delete user.password;
-      // TODO send welcome email
+      // send welcome email
+      const emailSender = new EmailSender();
+      await emailSender.sendWelcomeEmail(user.email, user.username);
+
       return res.json({ status: true, user });
     } catch (ex) {
       next(ex);

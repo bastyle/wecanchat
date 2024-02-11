@@ -14,7 +14,7 @@ class EmailSender{
         });    
     }
 
-    endWelcomeEmail(userEmail, userName) {
+    sendWelcomeEmail(userEmail, userName) {
         const mailOptions = {
           from: process.env.MAIL_USER,
           to: userEmail,
@@ -33,4 +33,4 @@ class EmailSender{
       }
 }
 
-module.exports = WelcomeEmailSender;
+module.exports = EmailSender;
