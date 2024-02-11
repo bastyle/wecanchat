@@ -112,7 +112,6 @@ module.exports.getUser = async (req, res, next) => {
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const userId = req.params.id;
-    // If no ID is provided, return all users
     const users = await User.find().select([
       "email",
       "username",
