@@ -3,6 +3,7 @@ const cors = require("cors")
 require('dotenv').config()
 const { default: mongoose } = require('mongoose')
 const userRoutes = require("./routes/userRoutes");
+const messageRoutes = require("./routes/messageRouter");
 //const UserModel = require('./model/userModel')
 
 
@@ -35,6 +36,7 @@ app.get("/api/health", (req, res) => {
   })
 
 app.use("/api/auth", userRoutes);  
+app.use("/api/messages", messageRoutes);
 
 const server = app.listen(process.env.PORT, () =>
   console.log("server started on port: " + process.env.PORT + " ...")
