@@ -1,5 +1,28 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "como313 group project wecanchat real time chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/api.test.js",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "chat",
+    "realtime",
+    "centennial",
+    "comp313"
+  ],
+  "author": "bastian bastias",
+  "license": "ISC",
   "dependencies": {
-    "nodemailer": "^6.9.9"
+    "nodemailer": "^6.9.9",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1",
+    "nodemon": "^3.0.3"
   }
 }
+
