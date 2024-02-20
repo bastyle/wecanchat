@@ -5,7 +5,7 @@ const { default: mongoose } = require('mongoose')
 const userRoutes = require("./routes/userRoutes");
 const messageRoutes = require("./routes/messageRouter");
 //const UserModel = require('./model/userModel')
-
+const socketManager = require("./manager/socketManager");
 
 const app = express()
 app.use(cors())
@@ -29,6 +29,10 @@ mongoose.connect(process.env.MONGODB_URL,{
     });*/
 });
 
+// Socket setup
+
+
+
 //test endpoint 
 app.get("/api/health", (req, res) => {
     console.log("health endpoint...")
@@ -41,3 +45,4 @@ app.use("/api/messages", messageRoutes);
 const server = app.listen(process.env.PORT, () =>
   console.log("server started on port: " + process.env.PORT + " ...")
 );
+const io = socketManager.setupSocket(server);
