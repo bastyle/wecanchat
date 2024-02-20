@@ -7,6 +7,7 @@ module.exports.login = async (req, res, next) => {
   try {
     console.log("login endpoint...")
     const { username, password } = req.body;
+    console.log("username: "+username+ "pass"+password)
     const user = await User.findOne({ username });
     console.log("user??: " + user)
     if (!user) {
@@ -110,9 +111,25 @@ module.exports.getUser = async (req, res, next) => {
 };
 
 module.exports.getAllUsers = async (req, res, next) => {
+  console.log("getAllUsers...")
   try {
     const userId = req.params.id;
     const users = await User.find().select([
+      "email",
+      "username",
+      "avatarImage",
+      "_id",
+    ]);
+    return res.json(users);
+  } catch (ex) {
+    next(ex);
+  }
+};
+
+module.exports.getAllUsersById = async (req, res, next) => {
+  console.log("getAllUsers (by id)...")  
+  try {
+    const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "username",
       "avatarImage",
