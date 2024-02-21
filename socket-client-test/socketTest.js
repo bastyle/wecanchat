@@ -13,6 +13,10 @@ socket.on('msg-recieve', (message) => {
   console.log('Received message:', message);
 });
 
+socket.on('send-msg', (message) => {
+  console.log('send-msg message:', message);
+});
+
 // Replace 'USER_ID_TO_SEND_TO' with an actual user ID in your application
 const recipientUserId = '65bfc7af84ef0ccd2c868c06';
 
