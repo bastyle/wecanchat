@@ -30,6 +30,7 @@ module.exports.login = async (req, res, next) => {
 };
 
 
+
 module.exports.register = async (req, res, next) => {
   console.log("register endpoint...")
   try {
