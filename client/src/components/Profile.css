@@ -1,0 +1,79 @@
+.profile-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ececec;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-header h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover; 
+    margin-bottom: 1rem;
+  }
+  
+  .profile-avatar-upload-btn {
+    background-color: #6e44ff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .profile-form .form-field {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-form .form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .profile-form .form-field input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .profile-form .form-actions {
+    text-align: right;
+  }
+  
+  .cancel-button,
+  .confirm-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #ccc;
+    margin-right: 0.5rem;
+  }
+  
+  .confirm-button {
+    background-color: #6e44ff;
+    color: white;
+  }
+  
+  .profile-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
