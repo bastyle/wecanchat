@@ -1,0 +1,78 @@
+.homepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; 
+  }
+  
+  .logo-container {
+    margin-right: 50px; 
+  }
+  
+  .logo {
+    background-image: url('../../assets/wecantalk.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 150px; 
+    width: 150px; 
+    text-align: center;
+  }
+  
+  .login-container {
+    background-color: #4dd0e1; 
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+  }
+  
+  .login-form h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    color: #ffffff;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .signup-link {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .signup-link a {
+    color: #0000ee;
+    text-decoration: none;
+  }
+  
+  .contiune-link {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .contiune-link a {
+    color: #0000ee;
+    text-decoration: none;
+  }
