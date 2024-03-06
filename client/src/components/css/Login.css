@@ -11,7 +11,7 @@
   }
   
   .logo {
-    background-image: url('../Images/wecantalk.png'); 
+    background-image: url('../../assets/wecantalk.png'); 
     background-size: contain;
     background-repeat: no-repeat;
     height: 150px; 
@@ -66,3 +66,13 @@
     text-decoration: none;
   }
   
+  .contiune-link {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .contiune-link a {
+    color: #0000ee;
+    text-decoration: none;
+  }

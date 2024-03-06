@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import '../CSS/Signup.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../css/Signup.css";
 
 function SignUp() {
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    avatar: '', 
+    username: "",
+    email: "",
+    password: "",
+    avatar: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,48 +38,52 @@ function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage('');
+    setErrorMessage("");
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        formData
+      );
 
       if (response.data.status) {
         const { email, username } = formData;
-        sendWelcomeEmail(email, username); 
-        navigate('/dashboard');
+        sendWelcomeEmail(email, username);
+        navigate("/announcement");
       } else {
-        setErrorMessage(response.data.msg || 'Failed to register.');
+        setErrorMessage(response.data.msg || "Failed to register.");
       }
     } catch (error) {
-      setErrorMessage(error.response?.data?.msg || 'An error occurred during registration.');
+      setErrorMessage(
+        error.response?.data?.msg || "An error occurred during registration."
+      );
     }
   };
 
   const sendWelcomeEmail = async (userEmail, userName) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/sendWelcomeEmail', {
-        userEmail,
-        userName,
-      });
-  
+      const response = await axios.post(
+        "http://localhost:5000/api/sendWelcomeEmail",
+        {
+          userEmail,
+          userName,
+        }
+      );
+
       if (response.data.status) {
-        console.log('Welcome email sent successfully!');
+        console.log("Welcome email sent successfully!");
       } else {
-        console.error('Error sending welcome email:', response.data.msg);
+        console.error("Error sending welcome email:", response.data.msg);
       }
     } catch (error) {
-      console.error('Error sending welcome email:', error);
+      console.error("Error sending welcome email:", error);
     }
   };
 
   return (
-    
-
-    
     <div className="signup-container">
-        <div className="logo">
-        </div>
-      
+      <div className="logo"></div>
+
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit} className="signup-form">
         <h2>Sign Up</h2>
@@ -127,12 +131,16 @@ function SignUp() {
             required
           />
         </div>
-        <button type="submit" className="signup-button">Sign Up</button>
+        <button type="submit" className="signup-button">
+          Sign Up
+        </button>
       </form>
-        
-      <Link to="/">Log in here</Link>
-
-      
+      <div className="login-link">
+        <Link to="/">Log in here</Link>
+      </div>
+      <div className="contiune-link">
+        <Link to="/announcements">Or continue as guest</Link>
+      </div>
     </div>
   );
 }
