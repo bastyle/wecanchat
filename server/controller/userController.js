@@ -9,6 +9,7 @@ module.exports.login = async (req, res, next) => {
     const { username, password } = req.body;
     console.log("username: "+username+ "pass"+password)
     const user = await User.findOne({ username });
+
     console.log("user??: " + user)
     if (!user) {
       console.log("Incorrect Username or Password 1")
@@ -19,11 +20,17 @@ module.exports.login = async (req, res, next) => {
       console.log("Incorrect Password")
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
-    console.log(user)
-    delete user.password;
-    let { ['password']: _, ...refUser } = user;
-    console.log(refUser)
-    return res.json({ status: true, user });
+    const user2 = await User.findOne({ username }).select([
+      "email",
+      "username",
+      "avatarImage",
+      "_id",
+    ]);
+    //console.log(user)
+    //delete user.password;
+    //let { ['password']: _, ...refUser } = user;
+    //console.log(refUser)
+    return res.json({ status: true, user2 });
   } catch (ex) {
     next(ex);
   }
