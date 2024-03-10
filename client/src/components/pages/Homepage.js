@@ -12,7 +12,7 @@ function Homepage() {
             <div className="options-container">
                 <Link to="/login" className="option">Login</Link>
                 <Link to="/signup" className="option">Sign Up</Link>
-                <Link to="/announcement" className="option">Announcements</Link>
+                <Link to="/announcements" className="option">Announcements</Link>
                 <Link to="/guest" className="option">Continue as Guest</Link>
             </div>
         </div>
