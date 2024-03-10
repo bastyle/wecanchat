@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../css/Login.css";
 import { loginRoute } from "../../utils/APIRoutes";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { genericToastOptions } from "../../utils/Globals";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -31,7 +34,8 @@ function Login() {
         );
         navigate("/chat");
       } else {
-        alert(response.data.msg);
+        //alert(response.data.msg);
+        toast.error(response.data.msg, genericToastOptions);
       }
     } catch (error) {
       const errorMessage =
