@@ -41,7 +41,7 @@ function Login() {
       const errorMessage =
         error.response?.data?.msg || "An error occurred during login.";
       console.error("Login error:", errorMessage);
-      alert(errorMessage);
+      toast.error(errorMessage, genericToastOptions);
     }
   };
 
