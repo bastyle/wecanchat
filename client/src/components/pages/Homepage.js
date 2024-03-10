@@ -6,8 +6,8 @@ function Homepage() {
     return (
         <div className="homepage">
             <h1 className="title">WeCanChat!</h1>
-            <div className="logo-container">
-                <div className="logo"></div>
+            <div className="homepage-logo-container">
+                <div className="homepage-logo"></div>
             </div>
             <div className="options-container">
                 <Link to="/login" className="option">Login</Link>
