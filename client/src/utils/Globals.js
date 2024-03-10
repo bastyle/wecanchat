@@ -7,4 +7,5 @@ export const genericToastOptions = {
     onClose: () => {
       console.log("options");
     }
+    
   };
