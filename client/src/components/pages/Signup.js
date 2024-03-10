@@ -15,6 +15,20 @@ function SignUp() {
     pauseOnHover: true,
     draggable: false,
     theme: "light",
+    onClose: () => {
+      console.log("options");
+    }
+  };
+  const successToastOptions = {
+    position: "top-center",
+    autoClose: 1500,
+    pauseOnHover: true,
+    draggable: false,
+    theme: "light",
+    onClose: () => {
+      //console.log("Redirecting to /announcements");
+      navigate("/announcements");
+    }
   };
 
   const [formData, setFormData] = useState({
@@ -64,8 +78,7 @@ function SignUp() {
             process.env.REACT_APP_LOCALHOST_KEY || 'defaultKey',
             JSON.stringify(response.data.user)
           );
-          //navigate("/");
-          //toggleIsRegistering();
+          toast.success("Registered successfully!", successToastOptions);
         }
       })
       .catch((error) => {
@@ -132,7 +145,7 @@ return (
         <button type="submit" className="signup-button">
           Sign Up
         </button>
-        <Link to="/login" className="login-link">Already have an account?? Login here!</Link>
+        <Link to="/login" className="login-link">Have an account? Login here!</Link>
         <br></br>
         <Link to="/" className="login-link">Go to Home</Link>
       </div>

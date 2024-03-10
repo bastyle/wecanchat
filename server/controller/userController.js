@@ -56,11 +56,11 @@ module.exports.register = async (req, res, next) => {
       username,
       password: hashedPassword,
     });
-    delete user.password;
+    
     // send welcome email
     const emailSender = new EmailSender();
     await emailSender.sendWelcomeEmail(user.email, user.username);
-
+    delete user.password;    
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
