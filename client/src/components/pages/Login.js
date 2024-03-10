@@ -68,7 +68,7 @@ function Login() {
             <Link to="/signup">Sign Up Here!</Link>
           </div>
           <div className="contiune-link">
-            <Link to="/announcements">Continue as Guest</Link>
+            <Link to="/">Home</Link>
           </div>
         </form>
       </div>

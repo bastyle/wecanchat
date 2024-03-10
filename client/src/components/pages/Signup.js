@@ -48,8 +48,7 @@ function SignUp() {
 
       if (response.data.status) {
         const { email, username } = formData;
-        sendWelcomeEmail(email, username);
-        navigate("/announcement");
+        //navigate("/chatHome", );
       } else {
         setErrorMessage(response.data.msg || "Failed to register.");
       }
@@ -60,29 +59,10 @@ function SignUp() {
     }
   };
 
-  const sendWelcomeEmail = async (userEmail, userName) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/sendWelcomeEmail",
-        {
-          userEmail,
-          userName,
-        }
-      );
-
-      if (response.data.status) {
-        console.log("Welcome email sent successfully!");
-      } else {
-        console.error("Error sending welcome email:", response.data.msg);
-      }
-    } catch (error) {
-      console.error("Error sending welcome email:", error);
-    }
-  };
 
   return (
     <div className="signup-container">
-      <div className="logo"></div>
+      {/*<div className="logo"></div>*/}
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <form onSubmit={handleSubmit} className="signup-form">
@@ -131,16 +111,17 @@ function SignUp() {
             required
           />
         </div>
-        <button type="submit" className="signup-button">
-          Sign Up
-        </button>
+        
+        <div className="">
+          <button type="submit" className="signup-button">
+            Sign Up
+          </button>
+          <Link to="/login" className="login-link">Already have an account? Login here!</Link>
+          <br></br>
+          <Link to="/" className="login-link">Go to Home</Link>          
+        </div>      
       </form>
-      <div className="login-link">
-        <Link to="/">Log in here</Link>
-      </div>
-      <div className="contiune-link">
-        <Link to="/announcements">Or continue as guest</Link>
-      </div>
+
     </div>
   );
 }
