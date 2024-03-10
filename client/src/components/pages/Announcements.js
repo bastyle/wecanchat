@@ -2,10 +2,13 @@ import React from "react";
 import "../css/Announcement.css";
 import thumbnail from "../../assets/default_thumbnail.png";
 import { Link } from "react-router-dom";
+import Navbar from "../Navbar";
 
 function Announcements() {
+
   return (
     <div>
+      <Navbar />
       <div className="Announcements-Container">
         <div className="Announcements-Header-Box">
           <h1>Announcements</h1>
@@ -46,6 +49,7 @@ function Announcements() {
           </Link>
         </div>
       </div>
+      
     </div>
   );
 }
