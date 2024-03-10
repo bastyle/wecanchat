@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "../css/Login.css";
+import { loginRoute } from "../../utils/APIRoutes";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        loginRoute,
         {
           username,
           password,
@@ -21,7 +22,7 @@ function Login() {
 
       if (response.data.status) {
         console.log("Login successful:", response.data);
-        navigate("/announcement");
+        navigate("/announcements");
       } else {
         alert(response.data.msg);
       }
