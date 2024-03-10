@@ -8,19 +8,19 @@ module.exports.login = async (req, res, next) => {
     console.log("login endpoint...")
     const { username, password } = req.body;
     console.log("username: " + username + "pass" + password)
-    const user = await User.findOne({ username });
+    const userAux = await User.findOne({ username });
 
-    console.log("user??: " + user)
-    if (!user) {
+    console.log("user??: " + userAux)
+    if (!userAux) {
       console.log("Incorrect Username or Password 1")
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, userAux.password);
     if (!isPasswordValid) {
       console.log("Incorrect Password")
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
-    const user2 = await User.findOne({ username }).select([
+    const user = await User.findOne({ username }).select([
       "email",
       "username",
       "avatarImage",
@@ -30,7 +30,7 @@ module.exports.login = async (req, res, next) => {
     //delete user.password;
     //let { ['password']: _, ...refUser } = user;
     //console.log(refUser)
-    return res.json({ status: true, user2 });
+    return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
   }

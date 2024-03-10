@@ -75,7 +75,7 @@ function SignUp() {
           toast.error(response.data.msg, toastOptions);
         } else {
           localStorage.setItem(
-            process.env.REACT_APP_LOCALHOST_KEY || 'defaultKey',
+            process.env.REACT_APP_LOCALHOST_KEY || 'user',
             JSON.stringify(response.data.user)
           );
           toast.success("Registered successfully!", successToastOptions);

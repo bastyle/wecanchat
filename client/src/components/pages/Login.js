@@ -22,6 +22,11 @@ function Login() {
 
       if (response.data.status) {
         console.log("Login successful:", response.data);
+        console.log("User:", response.data.user);
+        localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY || 'user',
+          JSON.stringify(response.data.user)
+        );
         navigate("/announcements");
       } else {
         alert(response.data.msg);

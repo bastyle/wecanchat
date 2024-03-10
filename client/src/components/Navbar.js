@@ -6,14 +6,16 @@ import axios from "axios";
 import { logoutRoute } from "../utils/APIRoutes";
 
 function Navbar() {
-  const isLoggedIn = true; 
+  const isLoggedIn = JSON.parse(localStorage.getItem("user"))?true:false; 
+
+
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogOut = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get(logoutRoute+"/"+JSON.parse(localStorage.getItem("defaultKey"))._id);
+      const response = await axios.get(logoutRoute+"/"+JSON.parse(localStorage.getItem("user"))._id);
       localStorage.clear();
       navigate("/");      
     } catch (error) {
@@ -34,7 +36,7 @@ function Navbar() {
               this.src = "../assets/default_avatar.png";
             }}
           />          
-          Welcome, {JSON.parse(localStorage.getItem("defaultKey")).username}
+          Welcome, {JSON.parse(localStorage.getItem("user")).username}
         </p>
         <div
           className="mobile-nav"
