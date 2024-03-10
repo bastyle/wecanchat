@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/Profile.css";
+import { Link } from "react-router-dom";
 
 function Profile() {
   const [profileData, setProfileData] = useState({
@@ -13,8 +14,14 @@ function Profile() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    // Retrieve the userId from a secure place, such as localStorage
+    const userId = localStorage.getItem('userId'); // Replace 'userId' with your actual local storage key
+    if (!userId) {
+      setMessage('No user ID found. Please log in again.');
+      return;
+    }
+
     const fetchProfileData = async () => {
-      const userId = "userId";
       try {
         const response = await axios.get(
           `http://localhost:5000/api/auth/user/${userId}`
@@ -46,21 +53,24 @@ function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const userId = localStorage.getItem('userId'); // Retrieve the userId again for updating the profile
+    if (!userId) {
+      setMessage('No user ID found. Please log in again.');
+      return;
+    }
+
     const updateData = {
       ...profileData,
       ...(newPassword && { password: newPassword }),
     };
+
     try {
-      const userId = "userId";
-      await axios.put(
-        `http://localhost:5000/api/auth/user/${userId}`,
-        updateData
-      );
-      setMessage("Profile updated successfully.");
-      setNewPassword("");
+      await axios.put(`http://localhost:5000/api/auth/user/${userId}`, updateData);
+      setMessage('Profile updated successfully.');
+      setNewPassword('');
     } catch (error) {
-      console.error("Error updating profile:", error);
-      setMessage("Failed to update profile.");
+      console.error('Error updating profile:', error);
+      setMessage('Failed to update profile.');
     }
   };
 
@@ -111,6 +121,9 @@ function Profile() {
             Confirm
           </button>
         </div>
+        <Link to="/chat" className="Back-Btn">
+          Go Back
+        </Link>
       </form>
     </div>
   );

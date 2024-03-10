@@ -7,22 +7,29 @@ module.exports.login = async (req, res, next) => {
   try {
     console.log("login endpoint...")
     const { username, password } = req.body;
-    console.log("username: "+username+ "pass"+password)
-    const user = await User.findOne({ username });
-    console.log("user??: " + user)
-    if (!user) {
+    console.log("username: " + username + "pass" + password)
+    const userAux = await User.findOne({ username });
+
+    console.log("user??: " + userAux)
+    if (!userAux) {
       console.log("Incorrect Username or Password 1")
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, userAux.password);
     if (!isPasswordValid) {
       console.log("Incorrect Password")
       return res.json({ msg: "Incorrect Username or Password", status: false });
     }
-    console.log(user)
-    delete user.password;
-    let { ['password']: _, ...refUser } = user;
-    console.log(refUser)
+    const user = await User.findOne({ username }).select([
+      "email",
+      "username",
+      "avatarImage",
+      "_id",
+    ]);
+    //console.log(user)
+    //delete user.password;
+    //let { ['password']: _, ...refUser } = user;
+    //console.log(refUser)
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
@@ -37,21 +44,23 @@ module.exports.register = async (req, res, next) => {
     const { username, email, password } = req.body;
     const usernameCheck = await User.findOne({ username });
     if (usernameCheck)
-      return res.json({ msg: "Username already used", status: false });
+      return res.status(200).json({ msg: "username or email already exists", status: false });
+    //return res.json({ msg: "Username already used", status: false });
     const emailCheck = await User.findOne({ email });
     if (emailCheck)
-      return res.json({ msg: "Email already used", status: false });
+      //return res.json({ msg: "Email already used", status: false });
+      return res.status(200).json({ msg: "username or email already exists", status: false });
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       email,
       username,
       password: hashedPassword,
     });
-    delete user.password;
+    
     // send welcome email
     const emailSender = new EmailSender();
     await emailSender.sendWelcomeEmail(user.email, user.username);
-
+    delete user.password;    
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
@@ -128,7 +137,7 @@ module.exports.getAllUsers = async (req, res, next) => {
 };
 
 module.exports.getAllUsersById = async (req, res, next) => {
-  console.log("getAllUsers (by id)...")  
+  console.log("getAllUsers (by id)...")
   try {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
