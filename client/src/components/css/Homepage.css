@@ -10,14 +10,14 @@
     background-color: #f5f5f5;
 }
 
-.logo-container {
+.homepage-logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 0px;
 }
 
-.logo {
+.homepage-logo {
     background-image: url('../../assets/messages.png');
     background-size: cover;
     background-position: center;
