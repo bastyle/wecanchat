@@ -1,0 +1,18 @@
+/* chat-content.css */
+.chat-content {
+    flex: 3; /* Take most of the space in the container */
+    background-color: #ffffff; /* Example background color */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    padding: 20px; /* Example padding */
+    /* Add more styles as needed */
+}
+
+.message {
+    margin-bottom: 10px; /* Example spacing between messages */
+}
+
+.sender {
+    font-weight: bold; /* Example style for sender name */
+}
+
+
