@@ -27,7 +27,9 @@ function Login() {
           process.env.REACT_APP_LOCALHOST_KEY || 'user',
           JSON.stringify(response.data.user)
         );
-        navigate("/announcements");
+        localStorage.setItem('userId',JSON.stringify(response.data.user._id)
+        );
+        navigate("/chat");
       } else {
         alert(response.data.msg);
       }
