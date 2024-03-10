@@ -24,13 +24,13 @@
 			"response": []
 		},
 		{
-			"name": "register",
+			"name": "registration",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"username\":\"test2\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -57,7 +57,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"username\":\"test1\",\r\n   \"email\": \"test1@test.cl\",\r\n   \"password\":\"test1234\"\r\n}",
+					"raw": "{\r\n   \"username\":\"test1\",\r\n   \"password\":\"test12344\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,13 +65,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/auth/register",
+					"raw": "{{url}}/auth/login",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"auth",
-						"register"
+						"login"
 					]
 				}
 			},
@@ -109,6 +109,60 @@
 						"auth",
 						"user",
 						"65bfc7af84ef0ccd2c868c06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-msg",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"65bfc7af84ef0ccd2c868c06\",\r\n    \"to\":\"65bfc9a574e8d96788df6389\",\r\n    \"message\":\"test message\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/messages/addmsg",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"messages",
+						"addmsg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-msg",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"65cccda6e7bd96d437bad96a\",\r\n    \"to\":\"65ccce07e7bd96d437bad970\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/messages/getmsg",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"messages",
+						"getmsg"
 					]
 				}
 			},
