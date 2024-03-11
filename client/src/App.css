@@ -1,6 +1,12 @@
+
+
+body{ /* Changes the background colour of unused spaces*/
+  background-color: #ffff;
+}
 .App {
   text-align: center;
 }
+
 
 .App-logo {
   height: 40vmin;
