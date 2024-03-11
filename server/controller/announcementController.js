@@ -7,6 +7,7 @@ module.exports.getAllAnnouncements = async (req, res, next) => {
             "title",
             "content",
             "createdDate",
+            "image",
             "_id",
         ]);
         return res.json(anns);
@@ -17,10 +18,11 @@ module.exports.getAllAnnouncements = async (req, res, next) => {
 
 module.exports.addAnnouncement = async (req, res, next) => {
     try {
-        const { title, content } = req.body;
+        const { title, content, image } = req.body;
         const data = await Announcements.create({
             title,
             content,
+            image: image ? image : null
         });
         if (data) return res.json({ msg: "Announcement added successfully." });
         else return res.json({ msg: "Failed to add Announcement to the database" });
