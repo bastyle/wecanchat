@@ -83,6 +83,7 @@ function SignUp() {
       })
       .catch((error) => {
         console.error('Error:', error.message);
+        toast.error("Error", toastOptions);
       });
   
 };
@@ -129,6 +130,7 @@ return (
           required
         />
       </div>
+      {/*
       <div className="input-group">
         <label htmlFor="avatar">Choose Avatar</label>
         <input
@@ -139,7 +141,7 @@ return (
           onChange={handleAvatarChange}
           required
         />
-      </div>
+</div>*/}
 
       <div className="">
         <button type="submit" className="signup-button">

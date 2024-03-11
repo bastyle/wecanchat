@@ -49,6 +49,9 @@ function Navbar() {
           <span></span>
         </div>
         <ul className={mobileNavOpen ? "open" : ""}>
+        <li>
+            <Link to="/chat">Chat</Link>
+          </li>
           <li>
             <Link to="/announcements">Announcements</Link>
           </li>
