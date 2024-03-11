@@ -4,6 +4,7 @@ require('dotenv').config()
 const { default: mongoose } = require('mongoose')
 const userRoutes = require("./routes/userRoutes");
 const messageRoutes = require("./routes/messageRouter");
+const avatarRoutes = require("./routes/avatarRoutes");
 //const UserModel = require('./model/userModel')
 const socketManager = require("./manager/socketManager");
 
@@ -41,6 +42,7 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/auth", userRoutes);  
 app.use("/api/messages", messageRoutes);
+app.use("/api/avatar", avatarRoutes);
 
 const server = app.listen(process.env.PORT, () =>
   console.log("server started on port: " + process.env.PORT + " ...")

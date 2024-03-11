@@ -20,7 +20,7 @@ function Announcements() {
                 className="thumbnail"
                 src={thumbnail}
                 alt="thumbnail"
-                onerror="this.src=`../assets/default_thumbnail.png`;"
+                onError="this.src=`../assets/default_thumbnail.png`;"
               />
               <h3>Announcement Test #1</h3>
             </div>
@@ -31,7 +31,7 @@ function Announcements() {
                 className="thumbnail"
                 src={thumbnail}
                 alt="thumbnail"
-                onerror="this.src=`../assets/default_thumbnail.png`;"
+                onError="this.src=`../assets/default_thumbnail.png`;"
               />
               <h3>Announcement Test #2</h3>
             </div>
@@ -42,7 +42,7 @@ function Announcements() {
                 className="thumbnail"
                 src={thumbnail}
                 alt="thumbnail"
-                onerror="this.src=`../assets/default_thumbnail.png`;"
+                onError="this.src=`../assets/default_thumbnail.png`;"
               />
               <h3>Announcement Test #3</h3>
             </div>
