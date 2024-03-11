@@ -6,13 +6,20 @@ const AnnouncementSchema = mongoose.Schema({
     required: true,
     min: 1,
     max: 100,
-    unique: true,
+    unique: false,
   },
   content: {
     type: String,
     required: true,
     min: 1,
     max: 1000,
+    unique: false,
+  },
+  author:{
+    type: String,
+    required: true,
+    min: 3,
+    max: 100,
     unique: false,
   },
   image: {
