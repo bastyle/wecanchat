@@ -30,7 +30,7 @@ function Navbar() {
         <p>
           <img
             className="avatar_icon"
-            src={avatar}
+            src={`data:image/svg+xml;base64,${JSON.parse(localStorage.getItem("user")).avatarImage || avatar}`}
             alt="avatar_icon"
             onError={() => {
               this.src = "../assets/default_avatar.png";
