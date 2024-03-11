@@ -51,6 +51,144 @@
 			"response": []
 		},
 		{
+			"name": "set-avatar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-avatar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-ann",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"title\":\"ann 1\",\r\n   \"content\": \"content block... jsajs \"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/announcement",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"announcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-avatars",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/avatar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-anns",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/announcement",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"announcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "login",
 			"request": {
 				"method": "POST",
