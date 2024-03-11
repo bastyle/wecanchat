@@ -41,7 +41,8 @@ module.exports.login = async (req, res, next) => {
 module.exports.register = async (req, res, next) => {
   console.log("register endpoint...")
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, avatarImage } = req.body;
+    console.log("avatarImage: " + avatarImage);
     const usernameCheck = await User.findOne({ username });
     if (usernameCheck)
       return res.status(200).json({ msg: "username or email already exists", status: false });
@@ -55,6 +56,7 @@ module.exports.register = async (req, res, next) => {
       email,
       username,
       password: hashedPassword,
+      avatarImage
     });
     
     // send welcome email
@@ -146,6 +148,27 @@ module.exports.getAllUsersById = async (req, res, next) => {
       "_id",
     ]);
     return res.json(users);
+  } catch (ex) {
+    next(ex);
+  }
+};
+
+module.exports.setAvatar = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const avatarImage = req.body.image;
+    const userData = await User.findByIdAndUpdate(
+      userId,
+      {
+        isAvatarImageSet: true,
+        avatarImage,
+      },
+      { new: true }
+    );
+    return res.json({
+      isSet: userData.isAvatarImageSet,
+      image: userData.avatarImage,
+    });
   } catch (ex) {
     next(ex);
   }
