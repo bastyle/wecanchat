@@ -30,7 +30,7 @@ function Navbar() {
         <p>
           <img
             className="avatar_icon"
-            src={avatar}
+            src={`data:image/svg+xml;base64,${JSON.parse(localStorage.getItem("user")).avatarImage || avatar}`}
             alt="avatar_icon"
             onError={() => {
               this.src = "../assets/default_avatar.png";
@@ -49,6 +49,9 @@ function Navbar() {
           <span></span>
         </div>
         <ul className={mobileNavOpen ? "open" : ""}>
+        <li>
+            <Link to="/chat">Chat</Link>
+          </li>
           <li>
             <Link to="/announcements">Announcements</Link>
           </li>
