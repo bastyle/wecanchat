@@ -27,6 +27,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: process.env.AVATAR_IMG,
   },
+  profileId: {
+    type: Number,
+    required: true,
+    default: 0, //0 regular user, 1 admin
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
