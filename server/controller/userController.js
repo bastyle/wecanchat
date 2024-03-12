@@ -25,6 +25,7 @@ module.exports.login = async (req, res, next) => {
       "username",
       "avatarImage",
       "_id",
+      "profileId"
     ]);
     //console.log(user)
     //delete user.password;
