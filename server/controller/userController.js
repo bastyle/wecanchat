@@ -83,10 +83,12 @@ module.exports.getAllUsers1 = async (req, res, next) => {
   try {
     console.log(req.params.id)
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
+      "_id",
+      "profileId", // 0 regular user, 1 admin
       "email",
       "username",
       "avatarImage",
-      "_id",
+      
     ]);
     return res.json(users);
   } catch (ex) {
@@ -127,10 +129,11 @@ module.exports.getAllUsers = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const users = await User.find().select([
+      "_id",
+      "profileId", // 0 regular user, 1 admin
       "email",
       "username",
       "avatarImage",
-      "_id",
     ]);
     return res.json(users);
   } catch (ex) {
