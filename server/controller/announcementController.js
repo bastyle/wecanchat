@@ -3,7 +3,7 @@ const { ObjectId } = require('mongoose').Types;
 
 module.exports.getAllAnnouncements = async (req, res, next) => {
     try {
-        console.log(req.params.id)
+        //console.log(req.params.id)
         const anns = await Announcements.find().select([
             "title",
             "createdDate",
@@ -36,7 +36,7 @@ module.exports.addAnnouncement = async (req, res, next) => {
 module.exports.getById = async (req, res, next) => {
     try {
       const annId = req.params.id;
-      console.log(annId);
+      //console.log(annId);
       if (annId) {
         if (!ObjectId.isValid(annId)) {
           return res.status(400).json({ msg: 'Invalid announcement ID' });

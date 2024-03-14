@@ -8,6 +8,11 @@
     font-weight: 700;
 }
 
+.Announcements-Header-Box h3{
+    text-align: center;
+    font-weight: 400;
+}
+
 .Announcements-Box{
     text-align: center;
     margin: 0;

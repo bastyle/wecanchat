@@ -7,6 +7,8 @@ import { announcementRoute } from "../../utils/APIRoutes";
 
 function Announcements() {
   const [announcements, setAnnouncements] = useState([]);
+  const isLoggedIn = JSON.parse(localStorage.getItem("user")) ? true : false;
+  const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
 
   useEffect(() => {
     // Fetch the list of announcements from the API
@@ -22,6 +24,11 @@ function Announcements() {
       <div className="Announcements-Container">
         <div className="Announcements-Header-Box">
           <h1>Announcements</h1>
+          {isAdminUser && (
+            <h3>
+            <Link to="/add/announcement">Add new Announcement</Link>
+            </h3>
+          )}
         </div>
 
         <div className="Announcements-Box">
@@ -29,14 +36,14 @@ function Announcements() {
             <Link to={`/announcements/article/${announcement._id}`} key={announcement._id}>
               <div className="Announcement">
                 <img
-                  className="thumbnail"                  
+                  className="thumbnail"
                   src={`data:image/svg+xml;base64,${announcement.image}`}
                   alt="thumbnail"
                   onError={(e) => {
                     e.target.src = thumbnail;
                   }}
                 />
-                <h3>{announcement.title}</h3>                
+                <h3>{announcement.title}</h3>
               </div>
             </Link>
           ))}
