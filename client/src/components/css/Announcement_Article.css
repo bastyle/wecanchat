@@ -47,3 +47,29 @@
     align-items: center;
     text-align: left;
 }
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Set height as needed */
+  }
+
+  .thumbnail2 {
+    width: 10rem;
+    height: 10rem;
+}
+
+  .content-container {
+    padding: 20px;
+  }
+  
+  .article-content {
+    font-size: 1.5rem;
+    line-height: .6;
+  }
