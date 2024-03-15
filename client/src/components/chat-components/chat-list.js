@@ -1,51 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './chat-list.css';
 import ChatListItems from "./chat-list-items";
 import ChatContent from "./chat-content";
+import axios from 'axios';
 
 const ChatList = () => {
-    const [allChats, setAllChats] = useState([
-        {
-          id: 1,
-          name: "Gayathri",
-          active: true,
-          isOnline: true,
-          messages: [ // Define messages for each chat
-            { sender: "Gayathri", text: "Hello!" },
-            { sender: "Bastian", text: "Hi there!" }
-          ]
-        },
-        {
-          id: 2,
-          name: "Bastian",
-          active: false,
-          isOnline: false,
-          messages: []
-        },
-        {
-            id: 3,
-            name: "Tejas",
-            active: false,
-            isOnline: false,
-            messages: []
-          },
-          {
-            id: 4,
-            name: "George",
-            active: false,
-            isOnline: false,
-            messages: []
-          },
-          {
-            id: 5,
-            name: "Zoe",
-            active: false,
-            isOnline: false,
-            messages: []
-          }
-    ]); 
-    
+    const [allChats, setAllChats] = useState([]);
     const [selectedChatId, setSelectedChatId] = useState(null);
+
+    useEffect(() => {
+      
+        axios.get('/api/messages/getmsg')
+            .then(response => {
+                setAllChats(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching messages:', error);
+            });
+    }, []);
 
     const handleChatItemClick = (chatId) => {
         setSelectedChatId(chatId);

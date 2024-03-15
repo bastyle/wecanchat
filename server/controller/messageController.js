@@ -10,6 +10,7 @@ module.exports.getMessages = async (req, res, next) => {
         $all: [from, to],
       },
     }).sort({ updatedAt: 1 });
+    
 
     const projectedMessages = messages.map((msg) => {
       return {
