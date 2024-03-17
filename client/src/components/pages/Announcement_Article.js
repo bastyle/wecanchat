@@ -46,7 +46,7 @@ function Announcement_Article() {
               <div className="image-container">
                 <img
                   className="thumbnail2"
-                  src={`data:image/svg+xml;base64,${article.image}`}
+                  src={article.image}
                   alt="thumbnail"
                 />
               </div>

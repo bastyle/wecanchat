@@ -37,7 +37,7 @@ function Announcements() {
               <div className="Announcement">
                 <img
                   className="thumbnail"
-                  src={`data:image/svg+xml;base64,${announcement.image}`}
+                  src={announcement.image}
                   alt="thumbnail"
                   onError={(e) => {
                     e.target.src = thumbnail;

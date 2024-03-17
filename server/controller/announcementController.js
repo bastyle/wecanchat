@@ -20,6 +20,8 @@ module.exports.getAllAnnouncements = async (req, res, next) => {
 module.exports.addAnnouncement = async (req, res, next) => {
     try {
         const { title, content, image, author } = req.body;
+        console.log(req.body);
+        
         const data = await Announcements.create({
             title,
             content,
