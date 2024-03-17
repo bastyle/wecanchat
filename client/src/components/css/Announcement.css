@@ -8,6 +8,11 @@
     font-weight: 700;
 }
 
+.Announcements-Header-Box h3{
+    text-align: center;
+    font-weight: 400;
+}
+
 .Announcements-Box{
     text-align: center;
     margin: 0;
@@ -28,6 +33,6 @@
 }
 
 .thumbnail {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 10%;
+    height: 10%;
 }
