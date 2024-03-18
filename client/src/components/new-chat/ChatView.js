@@ -5,6 +5,7 @@ import Contacts from "./Contacts";
 import io from 'socket.io-client';
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/ChatView.css";
 
 const ChatView = () => {
     const navigate = useNavigate();
@@ -49,18 +50,14 @@ const ChatView = () => {
     };
 
     return (
-        <div>
+        <div className="main-container">
             <div className="container">
-                <div className="row">
-                    <div className="col-4">
-                        <Contacts
-                            contacts={contacts}
-                            changeChat={handleChatChange}
-                        />
-                    </div>
-                    <div className="col-8">
-                        {/*<ChatContent currentChat={currentChat} />*/}
-                    </div>
+                <Contacts
+                    contacts={contacts}
+                    changeChat={handleChatChange}
+                />
+                <div className="col-8">
+                    {/*<ChatContent currentChat={currentChat} />*/}
                 </div>
             </div>
         </div>
