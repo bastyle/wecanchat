@@ -15,7 +15,7 @@ const ChatApp = () => {
     // Connect user to socket
     
     socket.emit('user_connected', newUserId);   
-    console.log('user_connected:', newUserId);
+    //console.log('user_connected:', newUserId);
 
     // Handle incoming messages
     socket.on('receive_message', ({ from, message }) => {

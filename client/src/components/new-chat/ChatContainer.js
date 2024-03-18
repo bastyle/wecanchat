@@ -62,7 +62,8 @@ const ChatContainer = ({ currentChat, socket }) => {
     useEffect(() => {
         if (socket.current) {
             socket.current.on("receive_message", (msg) => {
-                setArrivalMessage({ fromSelf: false, message: msg });
+                console.log("receive_message msg:", msg);
+                setArrivalMessage({ fromSelf: false, message: msg.message });
             });
         }
     }, []);
@@ -78,6 +79,7 @@ const ChatContainer = ({ currentChat, socket }) => {
     return (
         <div>
             <div className="chat-header">
+                <h2>Chat</h2>
                 <div className="user-details">
                     <div className="avatar">
                         <img

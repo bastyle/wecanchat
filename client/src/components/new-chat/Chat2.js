@@ -7,15 +7,16 @@ const ChatApp2 = () => {
   const [userId, setUserId] = useState('');
   const [message, setMessage] = useState('');
   const [receivedMessage, setReceivedMessage] = useState('');
-  const otherUserId = "65d5421c8d9fae5fec125846";
+  const otherUserId = "65f78c4cd2ad73ad5eca86fd";
 
   useEffect(() => {
     // Generate random user ID
-    const newUserId = "65f78c4cd2ad73ad5eca86fd";
+    const newUserId = "65d5421c8d9fae5fec125846";
     setUserId(newUserId);
     // Connect user to socket
     socket.emit('user_connected', newUserId);
     console.log('user_connected:', newUserId);
+
 
     // Handle incoming messages
     socket.on('receive_message', ({ from, message }) => {
@@ -29,6 +30,7 @@ const ChatApp2 = () => {
   }, []);
 
   const sendMessage = () => {
+    console.log('sending message:', message);
     socket.emit('send_message', { from: userId, to: otherUserId, message });
     setMessage('');
   };

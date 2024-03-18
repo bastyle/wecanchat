@@ -57,8 +57,9 @@ const ChatView = () => {
             <Navbar />
 
             <div className="main-container">
-
+          
                 <div className="container">
+                
                     <Contacts
                         contacts={contacts}
                         changeChat={handleChatChange}
