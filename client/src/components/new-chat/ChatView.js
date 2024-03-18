@@ -6,6 +6,9 @@ import io from 'socket.io-client';
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/ChatView.css";
+import ChatContainer from "./ChatContainer";
+import Navbar from "../Navbar";
+import Welcome from "./Welcome";
 
 const ChatView = () => {
     const navigate = useNavigate();
@@ -50,14 +53,23 @@ const ChatView = () => {
     };
 
     return (
-        <div className="main-container">
-            <div className="container">
-                <Contacts
-                    contacts={contacts}
-                    changeChat={handleChatChange}
-                />
-                <div className="col-8">
-                    {/*<ChatContent currentChat={currentChat} />*/}
+        <div>
+            <Navbar />
+
+            <div className="main-container">
+
+                <div className="container">
+                    <Contacts
+                        contacts={contacts}
+                        changeChat={handleChatChange}
+                    />
+                    <div className="col-8">
+                        {currentChat === undefined ? (
+                            <Welcome />
+                        ) : (
+                            <ChatContainer currentChat={currentChat} socket={socket} />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
