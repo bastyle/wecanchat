@@ -62,6 +62,7 @@ const ChatContainer = ({ currentChat, socket }) => {
         if (socket.current) {
             socket.current.on("receive_message", (msg) => {
                 console.log("receive_message msg:", msg);
+                // TODO add validation to check if the message is from the current chat
                 setArrivalMessage({ fromSelf: false, message: msg.message });
             });
         }
@@ -92,7 +93,7 @@ const ChatContainer = ({ currentChat, socket }) => {
                 </div>
                 
             </div>
-            <div className="chat-messages">
+            <div className="chat-messages scrollable">
                 {messages.map((message) => {
                     return (
                         <div ref={scrollRef} key={uuidv4()}>
