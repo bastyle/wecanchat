@@ -6,9 +6,9 @@ import axios from "axios";
 import { logoutRoute } from "../utils/APIRoutes";
 
 function Navbar() {
-  const isLoggedIn = JSON.parse(localStorage.getItem("user"))?true:false; 
-  const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId==1?true:false; 
-  console.log("isAdminUser",isAdminUser)
+  const isLoggedIn = JSON.parse(localStorage.getItem("user")) ? true : false;
+  const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
+  console.log("isAdminUser", isAdminUser)
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const navigate = useNavigate();
@@ -16,54 +16,56 @@ function Navbar() {
   const handleLogOut = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get(logoutRoute+"/"+JSON.parse(localStorage.getItem("user"))._id);
+      const response = await axios.get(logoutRoute + "/" + JSON.parse(localStorage.getItem("user"))._id);
       localStorage.clear();
-      navigate("/");      
+      navigate("/");
     } catch (error) {
-      console.error("Login error:", error);      
+      console.error("Login error:", error);
     }
   };
 
 
   if (isLoggedIn) {
     return (
-      <nav>
-        <p>
-          <img
-            className="avatar_icon"
-            src={`data:image/svg+xml;base64,${JSON.parse(localStorage.getItem("user")).avatarImage || avatar}`}
-            alt="avatar_icon"
-            onError={() => {
-              this.src = "../assets/default_avatar.png";
+      <div className="main-container">
+        <nav>
+          <p>
+            <img
+              className="avatar_icon"
+              src={`data:image/svg+xml;base64,${JSON.parse(localStorage.getItem("user")).avatarImage || avatar}`}
+              alt="avatar_icon"
+              onError={() => {
+                this.src = "../assets/default_avatar.png";
+              }}
+            />
+            Welcome, {JSON.parse(localStorage.getItem("user")).username}
+          </p>
+          <div
+            className="mobile-nav"
+            onClick={() => {
+              setMobileNavOpen(!mobileNavOpen);
             }}
-          />          
-          Welcome, {JSON.parse(localStorage.getItem("user")).username}
-        </p>
-        <div
-          className="mobile-nav"
-          onClick={() => {
-            setMobileNavOpen(!mobileNavOpen);
-          }}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <ul className={mobileNavOpen ? "open" : ""}>
-        <li>
-            <Link to="/chat">Chat</Link>
-          </li>
-          <li>
-            <Link to="/announcements">Announcements</Link>
-          </li>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/" onClick={handleLogOut} >Logout</Link>
-          </li>
-        </ul>
-      </nav>
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <ul className={mobileNavOpen ? "open" : ""}>
+            <li>
+              <Link to="/chat">Chat</Link>
+            </li>
+            <li>
+              <Link to="/announcements">Announcements</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/" onClick={handleLogOut} >Logout</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
   } else {
     return (
@@ -83,6 +85,6 @@ function Navbar() {
     );
   }
 
-  
+
 }
 export default Navbar;

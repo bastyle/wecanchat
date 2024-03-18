@@ -1,10 +1,11 @@
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: white;
     position: sticky;
     top: 0;
+    width: 85vw;
 }
 
 nav p {
