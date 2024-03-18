@@ -1,8 +1,9 @@
-.div {
+.div-conatiner {
     display: grid;
     grid-template-rows: 10% 80% 10%;
     gap: 0.1rem;
     overflow: hidden;
+    height: 100%;
 
     @media screen and (min-width: 720px) and (max-width: 1080px) {
         grid-template-rows: 15% 70% 15%;

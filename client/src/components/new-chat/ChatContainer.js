@@ -77,9 +77,9 @@ const ChatContainer = ({ currentChat, socket }) => {
     }, [messages]);
 
     return (
-        <div>
+        <div className="div-conatiner">
             <div className="chat-header">
-                <h2>Chat</h2>
+                
                 <div className="user-details">
                     <div className="avatar">
                         <img
