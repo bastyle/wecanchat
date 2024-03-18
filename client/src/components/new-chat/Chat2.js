@@ -11,7 +11,7 @@ const ChatApp2 = () => {
 
   useEffect(() => {
     // Generate random user ID
-    const newUserId = "65d5421c8d9fae5fec125846";
+    const newUserId = "65f86a6788b19ebb144f9b08";
     setUserId(newUserId);
     // Connect user to socket
     socket.emit('user_connected', newUserId);

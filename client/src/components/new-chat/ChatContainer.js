@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { recieveMessageRoute, sendMessageRoute } from "../../utils/APIRoutes";
 import "../css/ChatContainer.css";
+import ChatInput from "./ChatInput";
 
 
 const ChatContainer = ({ currentChat, socket }) => {
@@ -41,21 +42,19 @@ const ChatContainer = ({ currentChat, socket }) => {
     }, [currentChat]);
 
 
-    const handleSendMsg = async (msg) => {
+    const handleSendMsg = async (message) => {
+        console.log("handleSendMsg message:", message);
         const data = await getUser();
-        socket.current.emit("send_message", {
-            to: currentChat._id,
-            from: data._id,
-            msg,
-        });
+        //socket.current.emit("send_message", {to: currentChat._id, from: data._id,message});
+        socket.current.emit('send_message', { from: data._id, to: currentChat._id, message });
         await axios.post(sendMessageRoute, {
             from: data._id,
             to: currentChat._id,
-            message: msg,
+            message: message,
         });
 
         const msgs = [...messages];
-        msgs.push({ fromSelf: true, message: msg });
+        msgs.push({ fromSelf: true, message: message });
         setMessages(msgs);
     };
 
@@ -109,6 +108,7 @@ const ChatContainer = ({ currentChat, socket }) => {
                     );
                 })}
             </div>
+            <ChatInput handleSendMsg={handleSendMsg} />
         </div>
     );
 
