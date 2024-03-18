@@ -35,7 +35,7 @@
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: .2rem;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -55,8 +55,8 @@
         .content {
             max-width: 40%;
             overflow-wrap: break-word;
-            padding: .4rem;
-            font-size: 0.9rem;
+            padding: .2rem;
+            font-size: 1.0rem;
             border-radius: .5rem;
             color: #184904;
 

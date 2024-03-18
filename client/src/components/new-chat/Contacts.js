@@ -24,7 +24,7 @@ const Contacts = ({ contacts, changeChat }) => {
     };
 
     return (
-        <div className="">
+        <div className="contacts-container">
             <div className="brand">
                 <h3>Contacts</h3>
             </div>
@@ -50,17 +50,17 @@ const Contacts = ({ contacts, changeChat }) => {
                     );
                 })}
             </div>
-            <div className="current-user">
+             {/*<div className="current-user">
                 <div className="avatar">
                     <img
                         src={`data:image/svg+xml;base64,${currentUserImage}`}
                         alt="avatar"
                     />
                 </div>
-                <div className="username">
+               <div className="username">
                     <h2>{currentUserName}</h2>
-                </div>
             </div>
+            </div>*/}
         </div>
     );
 }

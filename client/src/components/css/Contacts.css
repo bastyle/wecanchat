@@ -1,14 +1,9 @@
-.div {
+.contacts-container {
     display: grid;
     grid-template-rows: 10% 75% 15%;
     overflow: hidden;
-    background-color: #080420;
-
-
-    .h3 {
-        color: rgb(163, 14, 14);
-        text-transform: uppercase;
-    }
+    background-color: #eaf8f9;
+    border-radius: 1.2rem;
 
     .brand {
         display: flex;
@@ -21,7 +16,7 @@
         }
 
         h3 {
-            color: rgb(155, 15, 15);
+            color: #9a86f3;
             text-transform: uppercase;
         }
     }
@@ -62,7 +57,7 @@
     }
 
     .contact {
-        background-color: #8dac8e34;
+        background-color: #e6c4f534;
         min-height: 5rem;
         cursor: pointer;
         width: 90%;
