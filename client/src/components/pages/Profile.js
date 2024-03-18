@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/Profile.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userRoute } from "../../utils/APIRoutes";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,10 +15,10 @@ function Profile() {
     email: "default@example.com",
   });
 
+  const [updatePassword, setUpdatePassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-
-  //const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
 
   const fetchProfileData = async () => {
@@ -28,13 +28,13 @@ function Profile() {
       setProfileData(response.data);
     } catch (error) {
       console.error("Error fetching profile data:", error);
-      toast.error(`Failed to load profile data: ${error.response ? error.response.data.message : error.message}`, genericToastOptions);      
+      toast.error(`Failed to load profile data: ${error.response ? error.response.data.message : error.message}`, genericToastOptions);
     }
   };
 
   useEffect(() => {
     if (!userId) {
-      toast.error("No user ID found. Please log in again.", genericToastOptions);            
+      toast.error("No user ID found. Please log in again.", genericToastOptions);
       return;
     }
     fetchProfileData();
@@ -52,30 +52,57 @@ function Profile() {
     setNewPassword(e.target.value);
   };
 
+
+  const handleCurrentPasswordChange = (e) => {
+    setCurrentPassword(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = localStorage.getItem('userId'); // Retrieve the userId again for updating the profile
     if (!userId) {
-      toast.error("No user ID found. Please log in again.", genericToastOptions);  
+      toast.error("No user ID found. Please log in again.", genericToastOptions);
       return;
     }
-
+    if (updatePassword && (currentPassword === newPassword)) {
+      toast.error("New Password must be different than current password.", genericToastOptions);
+      return;
+    }
     const updateData = {
       ...profileData,
-      ...(newPassword && { password: newPassword }),
+      ...(newPassword && { newPassword: newPassword }),
+      ...(currentPassword && { currentPassword: currentPassword }),
     };
-
+    console.log("updateData:", updateData);
     try {
-      toast.info('Not implemented yet!', genericToastOptions);
-      //await axios.put(`http://localhost:5000/api/auth/user/${userId}`, updateData);
-      
+      const response = await axios.put(`${userRoute}/${userId}`, updateData);
+      console.log("response:", response);
       //toast.success('Profile updated successfully.');
-
+      if (response.data.status) {
+        console.log("Profile updated successfully:", response.data);
+        toast.success("Profile updated successfully.", genericToastOptions);
+      }else{
+        toast.error("Error updating profile: "+response.data.msg, genericToastOptions);
+      }
     } catch (error) {
       console.error('Error updating profile:', error);
-      toast.error("Failed to update profile.", genericToastOptions);  
+      toast.error("Failed to update profile.", genericToastOptions);
     }
   };
+
+  const handleCheckboxChange = (e) => {
+    console.log("handleCheckboxChange");
+    setUpdatePassword(e.target.checked);
+    const { checked } = e.target;
+    console.log("checked:", checked);
+    setCurrentPassword("");
+    setNewPassword("");
+
+  };
+
+  function goBack() {
+    navigate("/chat");     
+  }
 
   return (
     <div>
@@ -104,6 +131,28 @@ function Profile() {
               onChange={handleChange}
             />
           </div>
+
+          <div className="form-field">
+            <label>First Name</label>
+            <input
+              type="text"
+              required
+              name="firstName"
+              value={profileData.firstName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-field">
+            <label>Last Name</label>
+            <input
+              type="text"
+              required
+              name="lastName"
+              value={profileData.lastName}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="form-field">
             <label>Email</label>
             <input
@@ -113,32 +162,52 @@ function Profile() {
               onChange={handleChange}
             />
           </div>
+          <br></br>
+          <div >
+            <input
+              label="Update Password"
+              type="checkbox"
+              name="updPassword"
+              checked={updatePassword}
+              onChange={handleCheckboxChange}
+            ></input>
+            <label>Update Password</label>
+          </div>
+          <br></br>
+
           <div className="form-field">
             <label>Current Password</label>
             <input
+              disabled={!updatePassword}
+              required={updatePassword}
+              min={8}
               type="password"
               value={currentPassword}
+              onChange={handleCurrentPasswordChange}
             />
           </div>
           <div className="form-field">
             <label>New Password</label>
             <input
+              disabled={!updatePassword}
+              required={updatePassword}
+              min={8}
               type="password"
               value={newPassword}
               onChange={handlePasswordChange}
             />
-          </div>          
+          </div>
           <div className="form-actions">
-            <button type="button" className="cancel-button">
+            <button type="button" className="cancel-button" onClick={goBack}>
               Cancel
             </button>
             <button type="submit" className="confirm-button">
               Confirm
             </button>
           </div>
-          <Link to="/chat" className="Back-Btn">
+          {/*<Link to="/chat" className="Back-Btn">
             Go Back
-          </Link>
+  </Link>*/}
         </form>
       </div>
     </div>
