@@ -3,6 +3,7 @@ import { getUser } from "../../utils/UserUtils";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { recieveMessageRoute, sendMessageRoute } from "../../utils/APIRoutes";
+import "../css/ChatContainer.css";
 
 
 const ChatContainer = ({ currentChat, socket }) => {

@@ -7,7 +7,7 @@ import Signup from "./components/pages/Signup";
 import AnnouncementArticle from "./components/pages/Announcement_Article";
 import Profile from "./components/pages/Profile";
 import Login from "./components/pages/Login"; // This is the Homepage/Startpage
-import ChatBody from './components/chat-components/chat-body';
+
 import CreateAnnouncement from './components/pages/CreateAnnouncement';
 import ChatApp from './components/new-chat/Chat';
 import ChatApp2 from './components/new-chat/Chat2';
