@@ -10,7 +10,7 @@ module.exports.login = async (req, res, next) => {
     console.log("username: " + username + "pass" + password)
     const userAux = await User.findOne({ username });
 
-    console.log("user??: " + userAux)
+    //console.log("user??: " + userAux)
     if (!userAux) {
       console.log("Incorrect Username or Password 1")
       return res.json({ msg: "Incorrect Username or Password", status: false });
@@ -59,11 +59,11 @@ module.exports.register = async (req, res, next) => {
       password: hashedPassword,
       avatarImage
     });
-    
+
     // send welcome email
     const emailSender = new EmailSender();
     await emailSender.sendWelcomeEmail(user.email, user.username);
-    delete user.password;    
+    delete user.password;
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
@@ -89,7 +89,7 @@ module.exports.getAllUsers1 = async (req, res, next) => {
       "email",
       "username",
       "avatarImage",
-      
+
     ]);
     return res.json(users);
   } catch (ex) {
@@ -111,6 +111,8 @@ module.exports.getUser = async (req, res, next) => {
         "email",
         "username",
         "avatarImage",
+        "firstName",
+        "lastName",
         "_id",
       ]);
 
@@ -177,3 +179,62 @@ module.exports.setAvatar = async (req, res, next) => {
     next(ex);
   }
 };
+
+module.exports.updUser = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const { firstName, lastName, email, currentPassword, newPassword, avatarImage, _id } = req.body;
+
+    if (!ObjectId.isValid(_id)) {
+      return res.status(400).json({ msg: 'Invalid user ID' });
+    }
+    
+    const userAux = await User.findById(new ObjectId(_id)).select([
+      "email",
+      "username",
+      "avatarImage",
+      "password",
+      "_id",
+    ]);
+
+    //console.log("user??: " + userAux)
+    if (!userAux) {
+      return res.json({ msg: "Incorrect Not Found!", status: false });
+    }
+    if (!newPassword || newPassword === "") {
+      console.log("No Password");
+      const user = await User.findByIdAndUpdate(
+        _id,
+        {
+          firstName,
+          lastName,
+          email,
+          avatarImage,
+        },
+        { new: true }
+      );
+      return res.json({ msg: "User Update successfully!", status: true });
+    } else {
+      const isPasswordValid = await bcrypt.compare(currentPassword, userAux.password);
+      if (!isPasswordValid) {
+        console.log("Incorrect Password")
+        return res.json({ msg: "Current Password Invalid!", status: false });
+      }
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const user = await User.findByIdAndUpdate(
+        _id,
+        {
+          firstName,
+          lastName,
+          email,
+          password: hashedPassword,
+          avatarImage,
+        },
+        { new: true }
+      );
+      return res.json({ msg: "User Update successfully!", status: true });
+    }
+  } catch (ex) {
+    next(ex);
+  }
+}
