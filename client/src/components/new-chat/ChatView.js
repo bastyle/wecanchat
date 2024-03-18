@@ -55,7 +55,7 @@ const ChatView = () => {
                     <div className="col-4">
                         <Contacts
                             contacts={contacts}
-                            handleChatChange={handleChatChange}
+                            changeChat={handleChatChange}
                         />
                     </div>
                     <div className="col-8">
