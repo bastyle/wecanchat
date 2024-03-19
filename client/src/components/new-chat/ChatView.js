@@ -16,6 +16,12 @@ const ChatView = () => {
     const [contacts, setContacts] = useState([]);
     const [currentChat, setCurrentChat] = useState(undefined);
     const [currentUser, setCurrentUser] = useState(undefined);
+    const [unreadMessages, setUnreadMessages] = useState({});
+
+    const handleNotifications = (updatedMessages) => {
+        console.log('updatedMessages:', updatedMessages);
+        setUnreadMessages(updatedMessages);
+    };
 
     useEffect(() => {
         if (!getUser()) {
@@ -57,19 +63,24 @@ const ChatView = () => {
             <Navbar />
 
             <div className="main-container">
-          
+
                 <div className="container">
-                
+
                     <Contacts
                         contacts={contacts}
                         changeChat={handleChatChange}
                         socket={socket.current}
+                        unreadMessages={unreadMessages}
+                        onNotifications={handleNotifications}
                     />
                     <div className="col-8">
                         {currentChat === undefined ? (
                             <Welcome />
                         ) : (
-                            <ChatContainer currentChat={currentChat} socket={socket} />
+                            <ChatContainer currentChat={currentChat} 
+                            socket={socket} 
+                            unreadMessages={unreadMessages} 
+                            onNotifications={handleNotifications} />
                         )}
                     </div>
                 </div>

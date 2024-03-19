@@ -3,12 +3,16 @@ import { getUser } from "../../utils/UserUtils";
 import "../css/Contacts.css";
 import { MdNotificationImportant, MdOutlineNotificationImportant } from "react-icons/md";
 import { IoNotificationsSharp } from "react-icons/io5";
-const Contacts = ({ contacts, changeChat, socket }) => {
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { genericToastOptions } from '../../utils/Globals';
+
+const Contacts = ({ contacts, changeChat, socket, unreadMessages, onNotifications }) => {
 
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
-    const [unreadMessages, setUnreadMessages] = useState({});
+    //const [unreadMessages, setUnreadMessages] = useState({});
 
     useEffect(() => {
         const getLocalUser = async () => {
@@ -21,29 +25,40 @@ const Contacts = ({ contacts, changeChat, socket }) => {
 
 
     const changeCurrentChat = (index, contact) => {
+
         setCurrentSelected(index);
         changeChat(contact);
-        setUnreadMessages((prevState) => ({
-            ...prevState,
-            [contact._id]: false, // Set unread message flag for the sender
-        }));
-        
+        const updatedMessages = { ...unreadMessages, [contact._id]: false };
+        console.log("updatedMessages:", updatedMessages);
+        onNotifications(updatedMessages);
     };
 
-    useEffect(() => {
-        if (socket) {
-            socket.on("receive_message", (msg) => {
-                //console.log("receive_message msg from:::::::::::::::::::::::::::::::::::::::");
-                console.log("receive_message msg from:", msg.from);
-                // TODO add validation to check if the message is from the current chat
-                console.log("currentSelected:", currentSelected);
-                setUnreadMessages((prevState) => ({
-                    ...prevState,
-                    [msg.from]: true, // Set unread message flag for the sender
-                }));
-            });
-        }
-    }, []);
+    const handleOnClick = (event) => {
+        console.log("handleOnClick event.target.name:", event.target.name);
+        console.log("event.target.name:", event.target.name)
+    };
+
+    /* useEffect(() => {
+         if (socket) {
+             socket.on("receive_message", (msg) => {
+                 //console.log("receive_message msg from:::::::::::::::::::::::::::::::::::::::");
+                 console.log("receive_message msg from:", msg.from);
+                 // TODO add validation to check if the message is from the current chat
+                 console.log("currentSelected:", currentSelected);
+                 //toast.success("msg:"+msg.message, genericToastOptions);
+                 console.log("contact._id:: "+contacts[currentSelected]._id);
+                 if (msg.from !== contacts[currentSelected]._id) {
+                     console.log("msg.from !== contacts[currentSelected]._id");
+                     toast.success("msg:" + msg.message, genericToastOptions);
+                 }
+ 
+                 setUnreadMessages((prevState) => ({
+                     ...prevState,
+                     [msg.from]: true, // Set unread message flag for the sender
+                 }));
+             });
+         }
+     }, []);*/
 
     return (
         <div className="contacts-container">

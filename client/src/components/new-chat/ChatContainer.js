@@ -7,7 +7,7 @@ import "../css/ChatContainer.css";
 import ChatInput from "./ChatInput";
 
 
-const ChatContainer = ({ currentChat, socket }) => {
+const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications }) => {
     //console.log("currentChat:", currentChat);
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
@@ -64,6 +64,20 @@ const ChatContainer = ({ currentChat, socket }) => {
                 console.log("receive_message msg:", msg);
                 // TODO add validation to check if the message is from the current chat
                 setArrivalMessage({ fromSelf: false, message: msg.message });
+                console.log("currentChat._id:", currentChat._id);
+                const updatedMessages = { ...unreadMessages, [msg.from]: true };
+                console.log("updatedMessages:", updatedMessages);
+                onNotifications(updatedMessages);
+                /*
+                                console.log("currentChat._id:", currentChat._id);
+                console.log("msg.from:", msg.from);
+                if(currentChat._id === msg.from){
+                    console.log("currentChat._id === msg.from");
+                    setArrivalMessage({ fromSelf: false, message: msg.message });
+                }else{
+                    console.log("currentChat._id !== msg.from");
+                }
+                    */
             });
         }
     }, []);
@@ -79,7 +93,7 @@ const ChatContainer = ({ currentChat, socket }) => {
     return (
         <div className="div-conatiner">
             <div className="chat-header">
-                
+
                 <div className="user-details">
                     <div className="avatar">
                         <img
@@ -91,7 +105,7 @@ const ChatContainer = ({ currentChat, socket }) => {
                         <h3>{currentChat.username}</h3>
                     </div>
                 </div>
-                
+
             </div>
             <div className="chat-messages scrollable">
                 {messages.map((message) => {
