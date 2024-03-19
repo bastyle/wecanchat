@@ -38,7 +38,7 @@ function Navbar() {
                 this.src = "../assets/default_avatar.png";
               }}
             />
-            Welcome, {JSON.parse(localStorage.getItem("user")).username}
+            {JSON.parse(localStorage.getItem("user")).username}
           </p>
           <div
             className="mobile-nav"
