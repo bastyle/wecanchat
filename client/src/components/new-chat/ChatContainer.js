@@ -68,13 +68,13 @@ const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotificatio
                 //console.log("currentChat._id:", currentChat._id + " msg.from:" + msg.from);
                 
                 if(currentChat._id === msg.from){
-                    console.log("currentChat._id === msg.from");
+                    //console.log("currentChat._id === msg.from");
                     const updatedNotiications = { ...unreadNotifications, [msg.from]: false };
                     setArrivalMessage({ fromSelf: false, message: msg.message, from: msg.from});                    
                 }
                 
                 if (currentChat._id != msg.from){
-                    console.log("currentChat._id != msg.from");
+                    //console.log("currentChat._id != msg.from");
                     const updatedNotiications = { ...unreadNotifications, [msg.from]: true };
                     onNotifications(updatedNotiications);                    
                 }
