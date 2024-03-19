@@ -77,10 +77,14 @@ const ChatView = () => {
                         {currentChat === undefined ? (
                             <Welcome />
                         ) : (
-                            <ChatContainer currentChat={currentChat} 
-                            socket={socket} 
-                            unreadMessages={unreadMessages} 
-                            onNotifications={handleNotifications} />
+                            <div>
+                                <ChatContainer
+                                    currentChat={currentChat}
+                                    socket={socket}
+                                    unreadMessages={unreadMessages}
+                                    onNotifications={handleNotifications} />
+                                
+                            </div>
                         )}
                     </div>
                 </div>

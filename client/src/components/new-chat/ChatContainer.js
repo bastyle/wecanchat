@@ -63,26 +63,27 @@ const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications })
             socket.current.on("receive_message", (msg) => {
                 console.log("receive_message msg:", msg);
                 // TODO add validation to check if the message is from the current chat
-                setArrivalMessage({ fromSelf: false, message: msg.message });
-                console.log("currentChat._id:", currentChat._id);
-                const updatedMessages = { ...unreadMessages, [msg.from]: true };
-                console.log("updatedMessages:", updatedMessages);
-                onNotifications(updatedMessages);
-                /*
-                                console.log("currentChat._id:", currentChat._id);
-                console.log("msg.from:", msg.from);
+                //setArrivalMessage({ fromSelf: false, message: msg.message });
+                
+                console.log("currentChat._id:", currentChat._id + " msg.from:" + msg.from);
+                
                 if(currentChat._id === msg.from){
                     console.log("currentChat._id === msg.from");
-                    setArrivalMessage({ fromSelf: false, message: msg.message });
-                }else{
-                    console.log("currentChat._id !== msg.from");
+                    const updatedNotiications = { ...unreadMessages, [msg.from]: false };
+                    setArrivalMessage({ fromSelf: false, message: msg.message });                    
                 }
-                    */
+                
+                if (currentChat._id != msg.from){
+                    console.log("currentChat._id != msg.from");
+                    const updatedNotiications = { ...unreadMessages, [msg.from]: true };
+                    onNotifications(updatedNotiications);                    
+                }
             });
         }
-    }, []);
+    }, [currentChat]);
 
     useEffect(() => {
+        console.log("arrivalMessage:", arrivalMessage);
         arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
     }, [arrivalMessage]);
 
@@ -93,7 +94,7 @@ const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications })
     return (
         <div className="div-conatiner">
             <div className="chat-header">
-
+                <span>Chat with {currentChat.username} {currentChat._id}</span>
                 <div className="user-details">
                     <div className="avatar">
                         <img
@@ -124,6 +125,7 @@ const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications })
                 })}
             </div>
             <ChatInput handleSendMsg={handleSendMsg} />
+
         </div>
     );
 

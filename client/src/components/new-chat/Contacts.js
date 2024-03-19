@@ -25,12 +25,11 @@ const Contacts = ({ contacts, changeChat, socket, unreadMessages, onNotification
 
 
     const changeCurrentChat = (index, contact) => {
-
         setCurrentSelected(index);
         changeChat(contact);
-        const updatedMessages = { ...unreadMessages, [contact._id]: false };
-        console.log("updatedMessages:", updatedMessages);
-        onNotifications(updatedMessages);
+        const updatedNotiications = { ...unreadMessages, [contact._id]: false };
+        console.log("updatedNotiications:", updatedNotiications);
+        onNotifications(updatedNotiications);
     };
 
     const handleOnClick = (event) => {
@@ -38,27 +37,6 @@ const Contacts = ({ contacts, changeChat, socket, unreadMessages, onNotification
         console.log("event.target.name:", event.target.name)
     };
 
-    /* useEffect(() => {
-         if (socket) {
-             socket.on("receive_message", (msg) => {
-                 //console.log("receive_message msg from:::::::::::::::::::::::::::::::::::::::");
-                 console.log("receive_message msg from:", msg.from);
-                 // TODO add validation to check if the message is from the current chat
-                 console.log("currentSelected:", currentSelected);
-                 //toast.success("msg:"+msg.message, genericToastOptions);
-                 console.log("contact._id:: "+contacts[currentSelected]._id);
-                 if (msg.from !== contacts[currentSelected]._id) {
-                     console.log("msg.from !== contacts[currentSelected]._id");
-                     toast.success("msg:" + msg.message, genericToastOptions);
-                 }
- 
-                 setUnreadMessages((prevState) => ({
-                     ...prevState,
-                     [msg.from]: true, // Set unread message flag for the sender
-                 }));
-             });
-         }
-     }, []);*/
 
     return (
         <div className="contacts-container">
