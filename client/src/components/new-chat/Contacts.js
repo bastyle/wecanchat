@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { getUser } from "../../utils/UserUtils";
 import "../css/Contacts.css";
-
-const Contacts = ({ contacts, changeChat }) => {
+import { MdNotificationImportant, MdOutlineNotificationImportant } from "react-icons/md";
+import { IoNotificationsSharp } from "react-icons/io5";
+const Contacts = ({ contacts, changeChat, socket }) => {
 
     const [currentUserName, setCurrentUserName] = useState(undefined);
     const [currentUserImage, setCurrentUserImage] = useState(undefined);
     const [currentSelected, setCurrentSelected] = useState(undefined);
+    const [unreadMessages, setUnreadMessages] = useState({});
 
     useEffect(() => {
         const getLocalUser = async () => {
@@ -21,7 +23,26 @@ const Contacts = ({ contacts, changeChat }) => {
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
         changeChat(contact);
+        setUnreadMessages((prevState) => ({
+            ...prevState,
+            [contact._id]: false, // Set unread message flag for the sender
+        }));
+        
     };
+
+    useEffect(() => {
+        if (socket) {
+            socket.on("receive_message", (msg) => {
+                console.log("receive_message msg from:", msg.from);
+                // TODO add validation to check if the message is from the current chat
+                console.log("currentSelected:", currentSelected);
+                setUnreadMessages((prevState) => ({
+                    ...prevState,
+                    [msg.from]: true, // Set unread message flag for the sender
+                }));
+            });
+        }
+    }, []);
 
     return (
         <div className="contacts-container">
@@ -45,22 +66,16 @@ const Contacts = ({ contacts, changeChat }) => {
                             </div>
                             <div className="username">
                                 <h3>{contact.username}</h3>
+
+                            </div>
+                            <div className="notification" key={`noti-${contact._id}`} name={`noti-${contact._id}`} >
+                                {unreadMessages[contact._id] && <MdOutlineNotificationImportant />}
+                                {/*<IoNotificationsSharp />*/}
                             </div>
                         </div>
                     );
                 })}
             </div>
-             {/*<div className="current-user">
-                <div className="avatar">
-                    <img
-                        src={`data:image/svg+xml;base64,${currentUserImage}`}
-                        alt="avatar"
-                    />
-                </div>
-               <div className="username">
-                    <h2>{currentUserName}</h2>
-            </div>
-            </div>*/}
         </div>
     );
 }

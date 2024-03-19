@@ -63,6 +63,7 @@ const ChatView = () => {
                     <Contacts
                         contacts={contacts}
                         changeChat={handleChatChange}
+                        socket={socket.current}
                     />
                     <div className="col-8">
                         {currentChat === undefined ? (
