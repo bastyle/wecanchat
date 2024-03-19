@@ -7,7 +7,7 @@ import "../css/ChatContainer.css";
 import ChatInput from "./ChatInput";
 
 
-const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications }) => {
+const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotifications }) => {
     //console.log("currentChat:", currentChat);
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
@@ -65,17 +65,17 @@ const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications })
                 // TODO add validation to check if the message is from the current chat
                 //setArrivalMessage({ fromSelf: false, message: msg.message });
                 
-                console.log("currentChat._id:", currentChat._id + " msg.from:" + msg.from);
+                //console.log("currentChat._id:", currentChat._id + " msg.from:" + msg.from);
                 
                 if(currentChat._id === msg.from){
                     console.log("currentChat._id === msg.from");
-                    const updatedNotiications = { ...unreadMessages, [msg.from]: false };
-                    setArrivalMessage({ fromSelf: false, message: msg.message });                    
+                    const updatedNotiications = { ...unreadNotifications, [msg.from]: false };
+                    setArrivalMessage({ fromSelf: false, message: msg.message, from: msg.from});                    
                 }
                 
                 if (currentChat._id != msg.from){
                     console.log("currentChat._id != msg.from");
-                    const updatedNotiications = { ...unreadMessages, [msg.from]: true };
+                    const updatedNotiications = { ...unreadNotifications, [msg.from]: true };
                     onNotifications(updatedNotiications);                    
                 }
             });
@@ -83,8 +83,14 @@ const ChatContainer = ({ currentChat, socket, unreadMessages, onNotifications })
     }, [currentChat]);
 
     useEffect(() => {
+        //add another validation to check if the message is from the current chat
+        if(arrivalMessage && arrivalMessage.from)
+            console.log("currentChat._id:", currentChat._id + " msg.from:" + arrivalMessage.from);
         console.log("arrivalMessage:", arrivalMessage);
-        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+        if((arrivalMessage && arrivalMessage.from) && arrivalMessage.from === currentChat._id){
+            arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+        }
+        
     }, [arrivalMessage]);
 
     useEffect(() => {

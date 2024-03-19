@@ -18,9 +18,9 @@ const ChatView = () => {
     const [currentUser, setCurrentUser] = useState(undefined);
     const [unreadMessages, setUnreadMessages] = useState({});
 
-    const handleNotifications = (updatedMessages) => {
-        console.log('updatedMessages:', updatedMessages);
-        setUnreadMessages(updatedMessages);
+    const handleNotifications = (updatedNotifications) => {
+        console.log('updatedNotifications:', updatedNotifications);
+        setUnreadMessages(updatedNotifications);
     };
 
     useEffect(() => {
