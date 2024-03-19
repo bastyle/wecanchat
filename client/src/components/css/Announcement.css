@@ -1,38 +1,42 @@
-.Announcements-Header-Box{
-    margin: auto;
-    background-color: #C2FBFE;
-    padding: 10px;
-}
-.Announcements-Header-Box h1{
-    text-align: center;
-    font-weight: 700;
-}
-
-.Announcements-Header-Box h3{
-    text-align: center;
-    font-weight: 400;
-}
-
-.Announcements-Box{
-    text-align: center;
-    margin: 0;
-}
-
-.Announcements-Box a{ 
-    text-decoration: none;
+.Announcements {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto); /* Adjust 200px to your preferred minimum height */
+    gap: 20px;
 }
 
 .Announcement {
-    background-color: #C8B4E5;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 220px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    justify-content: space-between;
+
+    .h3 {
+        margin-bottom: 0px;
+        text-align: center;
+    }
 }
 
 .Announcement:hover {
-    background-color: #A060FF;
-    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .thumbnail {
-    width: 10%;
-    height: 10%;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.Announcement h3 {
+    margin-top: 10px;
+    text-align: center;
+    align-items: flex-end;
 }
