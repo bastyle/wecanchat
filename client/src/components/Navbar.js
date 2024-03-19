@@ -8,7 +8,7 @@ import { logoutRoute } from "../utils/APIRoutes";
 function Navbar() {
   const isLoggedIn = JSON.parse(localStorage.getItem("user")) ? true : false;
   const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
-  console.log("isAdminUser", isAdminUser)
+  //onsole.log("isAdminUser", isAdminUser)
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const navigate = useNavigate();

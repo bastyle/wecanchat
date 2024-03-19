@@ -8,7 +8,7 @@ import ChatInput from "./ChatInput";
 
 
 const ChatContainer = ({ currentChat, socket }) => {
-    console.log("currentChat:", currentChat);
+    //console.log("currentChat:", currentChat);
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -16,15 +16,15 @@ const ChatContainer = ({ currentChat, socket }) => {
     useEffect(() => {
 
         const fetchData = async () => {
-            console.log("fetchData...");
+            //console.log("fetchData...");
             const data = await getUser();
-            console.log("data:", data);
+            //console.log("data:", data);
             if (currentChat) {
                 const response = await axios.post(recieveMessageRoute, {
                     from: data._id,
                     to: currentChat._id,
                 });
-                console.log("response:", response);
+                //console.log("response:", response);
                 setMessages(response.data);
             }
         };

@@ -33,6 +33,7 @@ const Contacts = ({ contacts, changeChat, socket }) => {
     useEffect(() => {
         if (socket) {
             socket.on("receive_message", (msg) => {
+                //console.log("receive_message msg from:::::::::::::::::::::::::::::::::::::::");
                 console.log("receive_message msg from:", msg.from);
                 // TODO add validation to check if the message is from the current chat
                 console.log("currentSelected:", currentSelected);
@@ -70,7 +71,7 @@ const Contacts = ({ contacts, changeChat, socket }) => {
                             </div>
                             <div className="notification" key={`noti-${contact._id}`} name={`noti-${contact._id}`} >
                                 {unreadMessages[contact._id] && <MdOutlineNotificationImportant />}
-                                {/*<IoNotificationsSharp />*/}
+                                {/*<MdOutlineNotificationImportant />*/}
                             </div>
                         </div>
                     );
