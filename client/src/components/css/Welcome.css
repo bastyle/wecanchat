@@ -1,0 +1,20 @@
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(136, 34, 219);
+    flex-direction: column;
+    img {
+        height: 20rem;
+    }
+    span {
+        color: rgb(136, 34, 219);
+    }
+}
+img {
+    height: 20rem;
+}
+
+span {
+    color: #4e0eff;
+}

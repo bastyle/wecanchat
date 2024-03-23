@@ -1,0 +1,75 @@
+.Article-Header-Box{
+    margin: auto;
+    background-color: #C8B4E5;
+    padding: 0.5em 0.5em;
+}
+.Article-Header-Box .Article-Title{
+    text-align: center;
+    font-weight: 700;
+}
+.Article-Header-Box .Article-Subtitle{
+    text-align: center;
+    font-weight: 600;
+}
+
+.Article-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Article-Buttons .Back-Btn {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+    color: #A060FF;
+}
+
+.Article-Buttons .Share-Btn {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+    color: #A060FF;
+}
+
+.Article-Buttons .Share-Btn:hover {
+    cursor: pointer;
+}
+
+.Article{
+    background-color: #F6F3FC;
+    margin: 1.5em;
+}
+.Article-Box {
+    display: flex;
+    padding: 0.5em 1.5em;
+    align-items: center;
+    text-align: left;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Set height as needed */
+  }
+
+  .thumbnail2 {
+    width: 40rem;
+    height: 10rem;
+}
+
+  .content-container {
+    padding: 20px;
+  }
+  
+  .article-content {
+    font-size: 1.5rem;
+    line-height: .6;
+  }

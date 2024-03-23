@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "3fd0b607-cd51-436a-a619-74146904b461",
+		"name": "wecanchat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7215557"
+	},
+	"item": [
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/health",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "set-avatar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-avatar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-ann",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"title\":\"ann 1\",\r\n   \"content\": \"content block... jsajs \"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/announcement",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"announcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-avatars",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/avatar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-anns",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/announcement",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"announcement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"test1\",\r\n   \"password\":\"test12344\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allusers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/allusers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"allusers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/user/65bfc7af84ef0ccd2c868c06",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"user",
+						"65bfc7af84ef0ccd2c868c06"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-msg",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"65bfc7af84ef0ccd2c868c06\",\r\n    \"to\":\"65bfc9a574e8d96788df6389\",\r\n    \"message\":\"test message\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/messages/addmsg",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"messages",
+						"addmsg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-msg",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"65cccda6e7bd96d437bad96a\",\r\n    \"to\":\"65ccce07e7bd96d437bad970\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/messages/getmsg",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"messages",
+						"getmsg"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

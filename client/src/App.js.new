@@ -1,0 +1,18 @@
+import React from "react";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import AppRouter from "./Router";
+
+// Navbar, should overlay over every components except login & signup
+function App() {
+  return (
+    <div>
+      <div>
+       
+        <AppRouter/>
+      </div>
+    </div>
+  );
+}
+
+export default App;

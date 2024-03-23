@@ -1,0 +1,38 @@
+.Announcements-Header-Box{
+    margin: auto;
+    background-color: #C2FBFE;
+    padding: 10px;
+}
+.Announcements-Header-Box h1{
+    text-align: center;
+    font-weight: 700;
+}
+
+.Announcements-Header-Box h3{
+    text-align: center;
+    font-weight: 400;
+}
+
+.Announcements-Box{
+    text-align: center;
+    margin: 0;
+}
+
+.Announcements-Box a{ 
+    text-decoration: none;
+}
+
+.Announcement {
+    background-color: #C8B4E5;
+    padding: 10px;
+}
+
+.Announcement:hover {
+    background-color: #A060FF;
+    cursor: pointer;
+}
+
+.thumbnail {
+    width: 10%;
+    height: 10%;
+}
