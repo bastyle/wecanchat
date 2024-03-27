@@ -8,7 +8,6 @@ import ChatInput from "./ChatInput";
 
 
 const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotifications }) => {
-    //console.log("currentChat:", currentChat);
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -16,15 +15,12 @@ const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotificatio
     useEffect(() => {
 
         const fetchData = async () => {
-            //console.log("fetchData...");
             const data = await getUser();
-            //console.log("data:", data);
             if (currentChat) {
                 const response = await axios.post(recieveMessageRoute, {
                     from: data._id,
                     to: currentChat._id,
                 });
-                //console.log("response:", response);
                 setMessages(response.data);
             }
         };
@@ -45,7 +41,6 @@ const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotificatio
     const handleSendMsg = async (message) => {
         console.log("handleSendMsg message:", message);
         const data = await getUser();
-        //socket.current.emit("send_message", {to: currentChat._id, from: data._id,message});
         socket.current.emit('send_message', { from: data._id, to: currentChat._id, message });
         await axios.post(sendMessageRoute, {
             from: data._id,
@@ -61,20 +56,13 @@ const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotificatio
     useEffect(() => {
         if (socket.current) {
             socket.current.on("receive_message", (msg) => {
-                console.log("receive_message msg:", msg);
-                // TODO add validation to check if the message is from the current chat
-                //setArrivalMessage({ fromSelf: false, message: msg.message });
-                
-                //console.log("currentChat._id:", currentChat._id + " msg.from:" + msg.from);
-                
+                console.log("receive_message msg:", msg);               
                 if(currentChat._id === msg.from){
-                    //console.log("currentChat._id === msg.from");
                     const updatedNotiications = { ...unreadNotifications, [msg.from]: false };
                     setArrivalMessage({ fromSelf: false, message: msg.message, from: msg.from});                    
                 }
                 
                 if (currentChat._id != msg.from){
-                    //console.log("currentChat._id != msg.from");
                     const updatedNotiications = { ...unreadNotifications, [msg.from]: true };
                     onNotifications(updatedNotiications);                    
                 }
