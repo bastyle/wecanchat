@@ -34,13 +34,11 @@ const ChatView = () => {
         if (currentUser) {
             socket.current = io(host);
             socket.current.emit('user_connected', currentUser._id);
-            //console.log('user_connected:', currentUser._id);
         }
     }, [currentUser]);
 
     useEffect(() => {
         const fetchData = async () => {
-            //console.log('currentUser:', currentUser);
             if (currentUser) {
                 try {
                     const response = await axios.get(`${allUsersRoute}/${currentUser._id}`);
