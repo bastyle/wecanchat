@@ -8,7 +8,6 @@ import ChatInput from "./ChatInput";
 import {useNavigate} from "react-router-dom";
 
 
-
 const ChatContainer = ({currentChat, socket, unreadNotifications, onNotifications}) => {
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
@@ -56,7 +55,7 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
         setMessages(msgs);
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (socket.current) {
             socket.current.on("receive_message", (msg) => {
                 console.log("receive_message msg:", msg);
@@ -68,10 +67,35 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
                 if (currentChat._id != msg.from) {
                     const updatedNotiications = {...unreadNotifications, [msg.from]: true};
                     onNotifications(updatedNotiications);
-                    showNotification(msg.message)
+                    //showNotification(msg.message)
                 }
 
             });
+        }
+    }, [currentChat]);*/
+
+    useEffect(() => {
+        if (socket.current) {
+            const messageHandler = (msg) => {
+                console.log("receive_message msg:::", msg);
+                if (currentChat._id === msg.from) {
+                    const updatedNotiications = {...unreadNotifications, [msg.from]: false};
+                    setArrivalMessage({fromSelf: false, message: msg.message, from: msg.from});
+                }
+
+                if (currentChat._id != msg.from) {
+                    const updatedNotiications = {...unreadNotifications, [msg.from]: true};
+                    onNotifications(updatedNotiications);
+                    showNotification(msg.message)
+                }
+            };
+
+            socket.current.on("receive_message", messageHandler);
+
+            // Return a function to clean up the event listener
+            return () => {
+                socket.current.off("receive_message", messageHandler);
+            };
         }
     }, [currentChat]);
 
@@ -92,7 +116,7 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
 
     function showNotification(notificationBody) {
         const img = '../assets/notifications.png';
-        console.log("notificationBody:: "+notificationBody)
+        console.log("notificationBody:::: " + notificationBody)
         const notification = new Notification('New message', {body: notificationBody, icon: img, image: img});
 
         notification.onclick = function (event) {
@@ -102,7 +126,7 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
 
         setTimeout(() => {
             notification.close();
-        }, 200);
+        }, 2000);
     }
 
     return (
