@@ -16,6 +16,12 @@ const ChatView = () => {
     const [contacts, setContacts] = useState([]);
     const [currentChat, setCurrentChat] = useState(undefined);
     const [currentUser, setCurrentUser] = useState(undefined);
+    const [unreadMessages, setUnreadMessages] = useState({});
+
+    const handleNotifications = (updatedNotifications) => {
+        console.log('updatedNotifications:', updatedNotifications);
+        setUnreadMessages(updatedNotifications);
+    };
 
     useEffect(() => {
         if (!getUser()) {
@@ -28,13 +34,11 @@ const ChatView = () => {
         if (currentUser) {
             socket.current = io(host);
             socket.current.emit('user_connected', currentUser._id);
-            console.log('user_connected:', currentUser._id);
         }
     }, [currentUser]);
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log('currentUser:', currentUser);
             if (currentUser) {
                 try {
                     const response = await axios.get(`${allUsersRoute}/${currentUser._id}`);
@@ -57,18 +61,28 @@ const ChatView = () => {
             <Navbar />
 
             <div className="main-container">
-          
+
                 <div className="container">
-                
+
                     <Contacts
                         contacts={contacts}
                         changeChat={handleChatChange}
+                        socket={socket.current}
+                        unreadMessages={unreadMessages}
+                        onNotifications={handleNotifications}
                     />
                     <div className="col-8">
                         {currentChat === undefined ? (
                             <Welcome />
                         ) : (
-                            <ChatContainer currentChat={currentChat} socket={socket} />
+                            <div>
+                                <ChatContainer
+                                    currentChat={currentChat}
+                                    socket={socket}
+                                    unreadMessages={unreadMessages}
+                                    onNotifications={handleNotifications} />
+                                
+                            </div>
                         )}
                     </div>
                 </div>

@@ -21,7 +21,7 @@ function Announcements() {
   return (
     <div>
       <Navbar />
-      <div className="Announcements-Container">
+      <div className="main-container">
         <div className="Announcements-Header-Box">
           <h1>Announcements</h1>
           {isAdminUser && (
@@ -31,10 +31,11 @@ function Announcements() {
           )}
         </div>
 
-        <div className="Announcements-Box">
+        <div className="Announcements">
           {announcements.map((announcement) => (
             <Link to={`/announcements/article/${announcement._id}`} key={announcement._id}>
               <div className="Announcement">
+              <div className="">
                 <img
                   className="thumbnail"
                   src={announcement.image}
@@ -43,7 +44,10 @@ function Announcements() {
                     e.target.src = thumbnail;
                   }}
                 />
-                <h3>{announcement.title}</h3>
+                </div>
+                <div className="">
+                  <h3>{announcement.title}</h3>
+                </div>
               </div>
             </Link>
           ))}

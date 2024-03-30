@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/Announcement_Article.css";
 import { useParams } from "react-router-dom";
 import Navbar from "../Navbar";
+import thumbnail from "../../assets/default_thumbnail.png";
 
 import { announcementRoute } from "../../utils/APIRoutes";
 function Announcement_Article() {
@@ -32,9 +33,9 @@ function Announcement_Article() {
   return (
     <div>
       <Navbar />
-      <div className="Article">
+      <div className="main-container">
         {isLoaded ? (
-          <div>
+          <div className="Article">
             <div className="Article-Container">
               <div className="Article-Header-Box">
                 <h1 className="Article-Title">{article.title}</h1>
@@ -47,6 +48,9 @@ function Announcement_Article() {
                 <img
                   className="thumbnail2"
                   src={article.image}
+                  onError={(e) => {
+                    e.target.src = thumbnail;
+                  }}
                   alt="thumbnail"
                 />
               </div>

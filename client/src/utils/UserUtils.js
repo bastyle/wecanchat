@@ -1,5 +1,5 @@
 export function getUser() {
-    console.log("getUser");
+    //console.log("getUser");
     const jsonString = localStorage.getItem("user");
     //console.log(jsonString);
     if (jsonString) {
@@ -16,7 +16,7 @@ export function getUser() {
 }
 
 export function isUserLogged() {
-    console.log("isUserLogged");
+    //console.log("isUserLogged");
     const user = getUser();
     return user?true:false;    
 }
