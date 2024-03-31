@@ -26,7 +26,7 @@ describe('API Users Routes', () => {
         password: 'test1234'
       });
     expect(res.statusCode).toEqual(200);
-    console.log(res.body);
+    //console.log(res.body);
     expect(res.body).toHaveProperty('status',true);
   });
 
@@ -38,7 +38,17 @@ describe('API Users Routes', () => {
         password: 'xxx'
       });
     expect(res.statusCode).toEqual(200);
-    console.log(res.body);
+    //console.log(res.body);
     expect(res.body).toHaveProperty('status',false);
+  });
+
+  it('should check the logout endpoint', async () => {
+    const res = await request(app)
+      .get('/api/auth/logout/123456')
+      .send({
+        username: 'testUser'
+      });
+      console.log(res.body);
+    expect(res.statusCode).toEqual(200);        
   });
 });
