@@ -1,3 +1,6 @@
+import axios from "axios";
+import { logoutRoute } from "./APIRoutes";
+
 export function getUser() {
     //console.log("getUser");
     const jsonString = localStorage.getItem("user");
@@ -18,10 +21,26 @@ export function getUser() {
 export function isUserLogged() {
     //console.log("isUserLogged");
     const user = getUser();
-    return user?true:false;    
+    return user ? true : false;
 }
 
 export function isAdminUser() {
-    if(!isUserLogged) return false;
-    return getUser().profileId==1?true:false;    
+    if (!isUserLogged) return false;
+    return getUser().profileId == 1 ? true : false;
+}
+
+export async function logoutUser() {
+    localStorage.clear();
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    const response = await axios.get(logoutRoute + "/" + JSON.parse(localStorage.getItem("user"))._id);
+    console.log("Logout response:", response);
+}
+
+export function login(user) {
+    localStorage.setItem(
+        process.env.REACT_APP_LOCALHOST_KEY || 'user',
+        JSON.stringify(user)
+    );
+    localStorage.setItem('userId', JSON.stringify(user._id));
+    localStorage.setItem("user", JSON.stringify(user));
 }
