@@ -2,6 +2,11 @@
 
 ## chat in real time application
 
+## Prerequisites
+Make sure you have the following software installed on your machine:
+- Node.js (version 18.18.2)
+- npm (version 9.8.1)
+
 ## server side (backend)
 server folder contains nodeJS code for the backend
 ```sh
