@@ -1,6 +1,6 @@
 nav {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     background-color: white;
     position: sticky;
@@ -13,6 +13,7 @@ nav p {
     color: #00E4E3;
     margin: 1rem;
     font-weight: bold;
+    justify-self: left;
 }
 
 nav .avatar_icon {
