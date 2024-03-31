@@ -4,7 +4,7 @@
   "description": "como313 group project wecanchat real time chat app",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/api.test.js",
+    "test": "jest --detectOpenHandles --forceExit --coverage --verbose",
     "start": "nodemon server.js"
   },
   "keywords": [
@@ -20,9 +20,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
+    "jest": "^29.7.0",
     "mongoose": "^8.1.1",
     "nodemailer": "^6.9.9",
     "nodemon": "^3.0.3",
-    "socket.io": "^4.7.4"
+    "socket.io": "^4.7.4",
+    "supertest": "^6.3.4"
   }
 }

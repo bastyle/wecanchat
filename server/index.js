@@ -44,3 +44,5 @@ app.use("/api/announcement", announcementRoutes);
 server.listen(process.env.PORT, () => {
   console.log("server started on port: " + process.env.PORT + " ...")
 });
+
+module.exports = app; // Export the app for testing
