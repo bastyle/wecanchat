@@ -115,13 +115,14 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
     }, [messages]);
 
     function showNotification(notificationBody) {
-        const img = '../assets/notifications.png';
+        const img = './notifications.png';
         console.log("notificationBody:::: " + notificationBody)
         const notification = new Notification('New message', {body: notificationBody, icon: img, image: img});
 
         notification.onclick = function (event) {
             event.preventDefault();
             navigate("/chat");
+            window.focus();
         }
 
         setTimeout(() => {
@@ -130,9 +131,9 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
     }
 
     return (
-        <div className="div-conatiner">
+        <div className="chat-container">
             <div className="chat-header">
-                <span>Chat with {currentChat.username} {currentChat._id}</span>
+                {/*<span>Chat with {currentChat.username} {currentChat._id}</span>*/}
                 <div className="user-details">
                     <div className="avatar">
                         <img

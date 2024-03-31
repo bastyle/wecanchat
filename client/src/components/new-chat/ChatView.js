@@ -71,18 +71,18 @@ const ChatView = () => {
                         unreadMessages={unreadMessages}
                         onNotifications={handleNotifications}
                     />
-                    <div className="col-8">
+                    <div className="">
                         {currentChat === undefined ? (
                             <Welcome />
                         ) : (
-                            <div>
+
                                 <ChatContainer
                                     currentChat={currentChat}
                                     socket={socket}
                                     unreadMessages={unreadMessages}
                                     onNotifications={handleNotifications} />
                                 
-                            </div>
+
                         )}
                     </div>
                 </div>

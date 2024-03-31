@@ -74,7 +74,7 @@ function Navbar() {
         return (
             <div className="main-container">
                 <nav>
-                    <p>
+                    <p className={avatar}>
                         <img
                             className="avatar_icon"
                             src={`data:image/svg+xml;base64,${JSON.parse(localStorage.getItem("user")).avatarImage || avatar}`}
