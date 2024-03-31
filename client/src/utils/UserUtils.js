@@ -1,6 +1,18 @@
 import axios from "axios";
 import { logoutRoute } from "./APIRoutes";
 
+
+
+export function getToken() {
+    const token = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('token='))
+    .split('=')[1];
+    console.log("getToken", token);
+    return token;
+}
+
+
 export function getUser() {
     //console.log("getUser");
     const jsonString = localStorage.getItem("user");
@@ -32,7 +44,7 @@ export function isAdminUser() {
 export async function logoutUser() {
     localStorage.clear();
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    const response = await axios.get(logoutRoute + "/" + JSON.parse(localStorage.getItem("user"))._id);
+    const response = await axios.get(logoutRoute + "/" + localStorage.getItem("userId"));
     console.log("Logout response:", response);
 }
 

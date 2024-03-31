@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import avatar from "../assets/default_avatar.png";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {logoutRoute} from "../utils/APIRoutes";
-import { logoutUser } from "../utils/UserUtils";
+import { logoutRoute } from "../utils/APIRoutes";
+import { getToken, logoutUser } from "../utils/UserUtils";
+import Cookies from 'js-cookie';
 
 
 function Navbar() {
@@ -16,7 +17,7 @@ function Navbar() {
     const handleLogOut = async (event) => {
         event.preventDefault();
         try {
-            logoutUser();            
+            logoutUser();
             navigate("/");
         } catch (error) {
             console.error("Login error:", error);
@@ -60,13 +61,22 @@ function Navbar() {
         }
     }
 
-   /* function localShowNotification() {
-        showNotification("Hello! Just checking in.");
-
-    }*/
+    /* function localShowNotification() {
+         showNotification("Hello! Just checking in.");
+ 
+     }*/
 
     useEffect(() => {
         askNotificationPermission();
+        //getToken();
+        const jwt = Cookies.get('token');
+        if (jwt) {
+            // Process the retrieved JWT token
+            console.log('JWT:', jwt);
+            // Use the JWT for authorized requests, etc.
+        } else {
+            console.log('No JWT found in cookie.');
+        }
     }, []);
 
 
