@@ -27,7 +27,7 @@ describe('API Users Routes', () => {
       });
     expect(res.statusCode).toEqual(200);
     //console.log(res.body);
-    expect(res.body).toHaveProperty('status',true);
+    expect(res.body).toHaveProperty('status', true);
   });
 
   it('should check incorrect login endpoint', async () => {
@@ -39,7 +39,7 @@ describe('API Users Routes', () => {
       });
     expect(res.statusCode).toEqual(200);
     //console.log(res.body);
-    expect(res.body).toHaveProperty('status',false);
+    expect(res.body).toHaveProperty('status', false);
   });
 
   it('should check the logout endpoint', async () => {
@@ -48,7 +48,32 @@ describe('API Users Routes', () => {
       .send({
         username: 'testUser'
       });
-      console.log(res.body);
-    expect(res.statusCode).toEqual(200);        
+    //console.log(res.body);
+    expect(res.statusCode).toEqual(200);
   });
+
+
+  it('should check the register endpoint', async () => {
+    const res = await request(app)
+      .post('/api/auth/register')
+      .send({
+        username: 'testUser',
+        email: 'testUser.bastias@gmail.com',
+        password: 'test1234',
+      });
+    expect(res.statusCode).toEqual(200);
+    //console.log(res.body);
+    expect(res.body).toHaveProperty('status', false);
+    expect(res.body).toHaveProperty('msg', "username or email already exists");
+  });
+
+  it('should get user details', async () => {
+    const userId = '123456'; 
+    const res = await request(app)
+      .get(`/api/auth/user/${userId}`);
+    console.log(res.body);
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toHaveProperty('msg', "Invalid user ID");
+  });
+
 });
