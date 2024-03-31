@@ -1,10 +1,11 @@
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     background-color: white;
     position: sticky;
     top: 0;
+    width: 85vw;
 }
 
 nav p {
@@ -12,13 +13,14 @@ nav p {
     color: #00E4E3;
     margin: 1rem;
     font-weight: bold;
+    justify-self: left;
 }
 
 nav .avatar_icon {
     margin: -0.5rem;
     width: 2.5rem;
     height: 2.5rem;
-    padding-right: 2.5rem;
+    padding-right: .9rem;
     padding-left: 0.5rem;
 }
 

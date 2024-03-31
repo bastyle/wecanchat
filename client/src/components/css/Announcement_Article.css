@@ -1,7 +1,8 @@
 .Article-Header-Box{
     margin: auto;
-    background-color: #C8B4E5;
+    /*background-color: #e6c4f534;*/
     padding: 0.5em 0.5em;
+    border-radius: 3rem;
 }
 .Article-Header-Box .Article-Title{
     text-align: center;
@@ -37,13 +38,50 @@
     cursor: pointer;
 }
 
-.Article{
-    background-color: #F6F3FC;
-    margin: 1.5em;
+.Article {
+    height: auto;
+    width: 85vw;
+    background-color: #edd9f634;
+    display: flex;
+    justify-content: center;
+    border-radius: 3rem;
+    padding: 20px;
 }
+
+
 .Article-Box {
     display: flex;
     padding: 0.5em 1.5em;
     align-items: center;
     text-align: left;
 }
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Set height as needed */
+  }
+
+  .thumbnail2 {
+    width: auto;
+    height: 10rem;
+    padding: 50px;
+    
+}
+
+  .content-container {
+    padding: 20px;
+    text-align: left;    
+  }
+  
+  .article-content {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    padding: inherit;
+  }

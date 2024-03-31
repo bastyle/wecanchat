@@ -1,30 +1,52 @@
-const { Server } = require('socket.io');
+const socketIo = require('socket.io');
 
 const setupSocket = (server) => {
-  const io = new Server(server, {
+  const io = new socketIo.Server(server, {
     cors: {
-      // origin: process.env.SOCKET_ORI,
       origin: '*',
       credentials: true,
     },
   });
 
-  global.onlineUsers = new Map();
+  // Keep track of connected users
+  const connectedUsers = new Map();
 
   io.on('connection', (socket) => {
-    global.chatSocket = socket;
+    console.log('New client connected!!');
 
-    socket.on('add-user', (userId) => {
-      onlineUsers.set(userId, socket.id);
-      console.log("add-user:: " + userId)
+    // Handle new user connection
+    socket.on('user_connected', (userId) => {
+      console.log(`User connected with ID: ${userId}`);
+      connectedUsers.set(userId, socket.id);
     });
 
-    socket.on('send-msg', (data) => {
-      console.log("send-msg:: " + JSON.stringify(data));
-      const sendUserSocket = onlineUsers.get(data.to);
-      if (sendUserSocket) {
-        socket.to(sendUserSocket).emit('msg-recieve', data.msg);
-        console.log("msg-recieve:: " + data.msg);
+    console.log('Connected users:', connectedUsers);
+    
+    // Handle direct messages
+    socket.on('send_message', ({ from, to, message }) => {
+      console.log(`Sending message from ${from} to ${to}: ${message}`);
+      const toSocketId = connectedUsers.get(to);
+      if (toSocketId) {
+        io.to(toSocketId).emit('receive_message', { from, message });
+      } else {
+        console.log(`User with ID ${to} is not connected`);
+      }
+    });
+
+    // Handle broadcast messages
+    socket.on('broadcast_message', (message) => {
+      io.emit('receive_broadcast', message);
+    });
+
+    // Handle disconnection
+    socket.on('disconnect', () => {
+      console.log('Client disconnected');
+      for (const [userId, socketId] of connectedUsers) {
+        if (socketId === socket.id) {
+          connectedUsers.delete(userId);
+          console.log(`User with ID ${userId} disconnected`);
+          break;
+        }
       }
     });
   });

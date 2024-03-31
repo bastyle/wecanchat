@@ -1,6 +1,18 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: false,
+    min: 2,
+    max: 50,
+  },
+  lastName: {
+    type: String,
+    required: false,
+    min: 2,
+    max: 50,
+  },
   username: {
     type: String,
     required: true,
@@ -26,6 +38,11 @@ const userSchema = new mongoose.Schema({
   avatarImage: {
     type: String,
     default: process.env.AVATAR_IMG,
+  },
+  profileId: {
+    type: Number,
+    required: true,
+    default: 0, //0 regular user, 1 admin
   },
 });
 
