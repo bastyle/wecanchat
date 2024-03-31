@@ -17,6 +17,7 @@ function Navbar() {
         try {
             const response = await axios.get(logoutRoute + "/" + JSON.parse(localStorage.getItem("user"))._id);
             localStorage.clear();
+            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
             navigate("/");
         } catch (error) {
             console.error("Login error:", error);

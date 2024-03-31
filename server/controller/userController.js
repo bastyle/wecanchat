@@ -2,15 +2,14 @@ const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const EmailSender = require("../utils/emailSender");
 const { ObjectId } = require('mongoose').Types;
+const jwt = require('jsonwebtoken')
 
-module.exports.login = async (req, res, next) => {
+module.exports.loginOri = async (req, res, next) => {
   try {
     console.log("login endpoint...")
     const { username, password } = req.body;
     console.log("username: " + username + "pass" + password)
     const userAux = await User.findOne({ username });
-
-    //console.log("user??: " + userAux)
     if (!userAux) {
       console.log("Incorrect Username or Password 1")
       return res.json({ msg: "Incorrect Username or Password", status: false });
@@ -27,15 +26,45 @@ module.exports.login = async (req, res, next) => {
       "_id",
       "profileId"
     ]);
-    //console.log(user)
-    //delete user.password;
-    //let { ['password']: _, ...refUser } = user;
-    //console.log(refUser)
     return res.json({ status: true, user });
   } catch (ex) {
     next(ex);
   }
 };
+
+module.exports.login = async (req, res) => {
+  try {
+      const { username, password } = req.body;
+      console.log('logging in...'+ username, password)
+      const userAux = await User.findOne({ username });
+
+      if(!userAux){
+          //return res.status(404).json({ message: 'User not found!' });
+          return res.json({ msg: "Incorrect Username or Password", status: false });
+      }
+
+      if (!userAux || !bcrypt.compareSync(password, userAux.password)) {
+          //return res.status(401).json({ message: 'Invalid credentials' });
+          return res.json({ msg: "Incorrect Username or Password", status: false });
+      }
+
+      const token = jwt.sign({ userId: userAux._id, profile: userAux.profileId }, process.env.JWT_SECRET, { expiresIn: '24h' });
+      res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
+      const user = await User.findOne({ username }).select([
+        "email",
+        "username",
+        "avatarImage",
+        "_id",
+        "profileId"
+      ]);
+      //res.json({ token });
+      //res.status(201).json({user: user.userId})
+      return res.json({ status: true, user });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error logging in' });
+  }
+}
 
 
 
