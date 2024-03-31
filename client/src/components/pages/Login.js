@@ -6,6 +6,7 @@ import { loginRoute } from "../../utils/APIRoutes";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { genericToastOptions } from "../../utils/Globals";
+import { login } from "../../utils/UserUtils";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -26,12 +27,7 @@ function Login() {
       if (response.data.status) {
         console.log("Login successful:", response.data);
         console.log("User:", response.data.user);
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY || 'user',
-          JSON.stringify(response.data.user)
-        );
-        localStorage.setItem('userId',JSON.stringify(response.data.user._id)
-        );
+        login(response.data.user);        
         navigate("/chat");
       } else {
         //alert(response.data.msg);

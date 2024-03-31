@@ -4,6 +4,7 @@ import avatar from "../assets/default_avatar.png";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {logoutRoute} from "../utils/APIRoutes";
+import { logoutUser } from "../utils/UserUtils";
 
 
 function Navbar() {
@@ -15,9 +16,7 @@ function Navbar() {
     const handleLogOut = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(logoutRoute + "/" + JSON.parse(localStorage.getItem("user"))._id);
-            localStorage.clear();
-            document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            logoutUser();            
             navigate("/");
         } catch (error) {
             console.error("Login error:", error);
