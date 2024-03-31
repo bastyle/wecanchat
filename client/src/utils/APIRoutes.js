@@ -1,5 +1,4 @@
-export const host = "http://localhost:5000";
-//export const host = "https://wecanchat-nc8w.onrender.com";
+export const host = "https://wecanchat-nc8w.onrender.com";
 export const loginRoute = `${host}/api/auth/login`;
 export const userRoute = `${host}/api/auth/user`;
 export const registerRoute = `${host}/api/auth/register`;
@@ -11,3 +10,4 @@ export const setAvatarRoute = `${host}/api/auth/setavatar`;
 export const avatarsRoute = `${host}/api/avatar`;
 export const openAiRoute = `${host}/api/openai`;
 export const announcementRoute = `${host}/api/announcement`;
+//export const host = "http://localhost:5000";
