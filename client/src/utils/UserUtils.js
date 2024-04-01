@@ -48,11 +48,9 @@ export async function logoutUser() {
     console.log("Logout response:", response);
 }
 
-export function login(user) {
-    localStorage.setItem(
-        process.env.REACT_APP_LOCALHOST_KEY || 'user',
-        JSON.stringify(user)
-    );
-    localStorage.setItem('userId', JSON.stringify(user._id));
-    localStorage.setItem("user", JSON.stringify(user));
+export function login(data) {
+    //localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY || 'user',JSON.stringify(data.user) );
+    localStorage.setItem('userId', JSON.stringify(data.user._id));
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("token", JSON.stringify(data.token));
 }

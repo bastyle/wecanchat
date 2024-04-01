@@ -59,7 +59,7 @@ module.exports.login = async (req, res) => {
       ]);
       //res.json({ token });
       //res.status(201).json({user: user.userId})
-      return res.json({ status: true, user });
+      return res.json({ status: true, user, token: token });
   } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Error logging in' });

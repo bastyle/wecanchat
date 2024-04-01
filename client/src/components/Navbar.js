@@ -61,22 +61,18 @@ function Navbar() {
         }
     }
 
-    /* function localShowNotification() {
-         showNotification("Hello! Just checking in.");
- 
-     }*/
-
     useEffect(() => {
         askNotificationPermission();
         //getToken();
-        const jwt = Cookies.get('token');
+        console.log('token...'+localStorage.getItem("token"));       
+        /*const jwt = Cookies.get('_ga');
         if (jwt) {
             // Process the retrieved JWT token
             console.log('JWT:', jwt);
             // Use the JWT for authorized requests, etc.
         } else {
             console.log('No JWT found in cookie.');
-        }
+        }*/
     }, []);
 
 

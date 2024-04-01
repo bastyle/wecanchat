@@ -27,7 +27,8 @@ function Login() {
       if (response.data.status) {
         console.log("Login successful:", response.data);
         console.log("User:", response.data.user);
-        login(response.data.user);        
+        //login(response.data.user);
+        login(response.data);
         navigate("/chat");
       } else {
         //alert(response.data.msg);
