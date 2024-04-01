@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import avatar from "../assets/default_avatar.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { logoutRoute } from "../utils/APIRoutes";
 import { getToken, logoutUser } from "../utils/UserUtils";
 import Cookies from 'js-cookie';
 
@@ -63,16 +61,7 @@ function Navbar() {
 
     useEffect(() => {
         askNotificationPermission();
-        //getToken();
-        console.log('token...'+localStorage.getItem("token"));       
-        /*const jwt = Cookies.get('_ga');
-        if (jwt) {
-            // Process the retrieved JWT token
-            console.log('JWT:', jwt);
-            // Use the JWT for authorized requests, etc.
-        } else {
-            console.log('No JWT found in cookie.');
-        }*/
+        getToken();        
     }, []);
 
 
