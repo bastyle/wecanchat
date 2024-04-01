@@ -1,14 +1,14 @@
-import {useEffect, useRef, useState} from "react";
-import {getUser} from "../../utils/UserUtils";
-import {v4 as uuidv4} from "uuid";
+import { useEffect, useRef, useState } from "react";
+import { getToken, getUser } from "../../utils/UserUtils";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import {recieveMessageRoute, sendMessageRoute} from "../../utils/APIRoutes";
+import { recieveMessageRoute, sendMessageRoute } from "../../utils/APIRoutes";
 import "../css/ChatContainer.css";
 import ChatInput from "./ChatInput";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
-const ChatContainer = ({currentChat, socket, unreadNotifications, onNotifications}) => {
+const ChatContainer = ({ currentChat, socket, unreadNotifications, onNotifications }) => {
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
     const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -22,6 +22,10 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
                 const response = await axios.post(recieveMessageRoute, {
                     from: data._id,
                     to: currentChat._id,
+                }, {
+                    headers: {
+                        Authorization: "Bearer " + getToken()
+                    }
                 });
                 setMessages(response.data);
             }
@@ -43,48 +47,33 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
     const handleSendMsg = async (message) => {
         console.log("handleSendMsg message:", message);
         const data = await getUser();
-        socket.current.emit('send_message', {from: data._id, to: currentChat._id, message});
+        socket.current.emit('send_message', { from: data._id, to: currentChat._id, message });
         await axios.post(sendMessageRoute, {
             from: data._id,
             to: currentChat._id,
             message: message,
+        }, {
+            headers: {
+                Authorization: "Bearer " + getToken()
+            }
         });
 
         const msgs = [...messages];
-        msgs.push({fromSelf: true, message: message});
+        msgs.push({ fromSelf: true, message: message });
         setMessages(msgs);
     };
-
-    /*useEffect(() => {
-        if (socket.current) {
-            socket.current.on("receive_message", (msg) => {
-                console.log("receive_message msg:", msg);
-                if (currentChat._id === msg.from) {
-                    const updatedNotiications = {...unreadNotifications, [msg.from]: false};
-                    setArrivalMessage({fromSelf: false, message: msg.message, from: msg.from});
-                }
-
-                if (currentChat._id != msg.from) {
-                    const updatedNotiications = {...unreadNotifications, [msg.from]: true};
-                    onNotifications(updatedNotiications);
-                    //showNotification(msg.message)
-                }
-
-            });
-        }
-    }, [currentChat]);*/
 
     useEffect(() => {
         if (socket.current) {
             const messageHandler = (msg) => {
                 console.log("receive_message msg:::", msg);
                 if (currentChat._id === msg.from) {
-                    const updatedNotiications = {...unreadNotifications, [msg.from]: false};
-                    setArrivalMessage({fromSelf: false, message: msg.message, from: msg.from});
+                    const updatedNotiications = { ...unreadNotifications, [msg.from]: false };
+                    setArrivalMessage({ fromSelf: false, message: msg.message, from: msg.from });
                 }
 
                 if (currentChat._id != msg.from) {
-                    const updatedNotiications = {...unreadNotifications, [msg.from]: true};
+                    const updatedNotiications = { ...unreadNotifications, [msg.from]: true };
                     onNotifications(updatedNotiications);
                     showNotification(msg.message)
                 }
@@ -111,13 +100,13 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
     }, [arrivalMessage]);
 
     useEffect(() => {
-        scrollRef.current?.scrollIntoView({behavior: "smooth"});
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
     function showNotification(notificationBody) {
         const img = './notifications.png';
         console.log("notificationBody:::: " + notificationBody)
-        const notification = new Notification('New message', {body: notificationBody, icon: img, image: img});
+        const notification = new Notification('New message', { body: notificationBody, icon: img, image: img });
 
         notification.onclick = function (event) {
             event.preventDefault();
@@ -153,7 +142,7 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
                         <div ref={scrollRef} key={uuidv4()}>
                             <div
                                 className={`message ${message.fromSelf ? "sended" : "recieved"
-                                }`}
+                                    }`}
                             >
                                 <div className="content ">
                                     <p>{message.message}</p>
@@ -163,7 +152,7 @@ const ChatContainer = ({currentChat, socket, unreadNotifications, onNotification
                     );
                 })}
             </div>
-            <ChatInput handleSendMsg={handleSendMsg}/>
+            <ChatInput handleSendMsg={handleSendMsg} />
 
         </div>
     );
