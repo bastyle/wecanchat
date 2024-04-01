@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import avatar from "../assets/default_avatar.png";
 import { Link, useNavigate } from "react-router-dom";
-import { getToken, logoutUser } from "../utils/UserUtils";
-import Cookies from 'js-cookie';
+import { getToken, isUserLogged, logoutUser } from "../utils/UserUtils";
 
 
 function Navbar() {
-    const isLoggedIn = JSON.parse(localStorage.getItem("user")) ? true : false;
+    const isLoggedIn = isUserLogged(); 
     //const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
     const navigate = useNavigate();

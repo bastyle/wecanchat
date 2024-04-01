@@ -1,6 +1,6 @@
 import axios from "axios";
 import { allUsersRoute, host } from "../../utils/APIRoutes";
-import { getUser } from "../../utils/UserUtils";
+import { getToken, getUser } from "../../utils/UserUtils";
 import Contacts from "./Contacts";
 import io from 'socket.io-client';
 import React, { useEffect, useState, useRef } from "react";
@@ -41,7 +41,11 @@ const ChatView = () => {
         const fetchData = async () => {
             if (currentUser) {
                 try {
-                    const response = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+                    const response = await axios.get(`${allUsersRoute}/${currentUser._id}`, {
+                        headers: {
+                            Authorization: "Bearer " + getToken()
+                        }
+                    });
                     setContacts(response.data);
                 } catch (error) {
                     console.error('Error fetching contacts:', error);
@@ -59,11 +63,8 @@ const ChatView = () => {
     return (
         <div>
             <Navbar />
-
             <div className="main-container">
-
                 <div className="container">
-
                     <Contacts
                         contacts={contacts}
                         changeChat={handleChatChange}
@@ -75,14 +76,11 @@ const ChatView = () => {
                         {currentChat === undefined ? (
                             <Welcome />
                         ) : (
-
-                                <ChatContainer
-                                    currentChat={currentChat}
-                                    socket={socket}
-                                    unreadMessages={unreadMessages}
-                                    onNotifications={handleNotifications} />
-                                
-
+                            <ChatContainer
+                                currentChat={currentChat}
+                                socket={socket}
+                                unreadMessages={unreadMessages}
+                                onNotifications={handleNotifications} />
                         )}
                     </div>
                 </div>
