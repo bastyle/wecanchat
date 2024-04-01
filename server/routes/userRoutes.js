@@ -17,7 +17,7 @@ const auth = require("../middleware/auth");
   router.get("/allusers", auth, getAllUsers);
   router.get("/allusers/:id", auth, getAllUsersById);
   router.get("/user/:id", auth, getUser);
-  router.put("/user/:id", updUser);
+  router.put("/user/:id", auth, updUser);
   router.get("/logout/:id", logOut);
   router.post("/setavatar/:id", setAvatar);
   

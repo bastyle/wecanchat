@@ -79,7 +79,11 @@ function Profile() {
     };
     console.log("updateData:", updateData);
     try {
-      const response = await axios.put(`${userRoute}/${userId}`, updateData);
+      const response = await axios.put(`${userRoute}/${userId}`, updateData, {
+        headers: {
+          Authorization: "Bearer " + getToken()
+        }
+      });
       console.log("response:", response);
       //toast.success('Profile updated successfully.');
       if (response.data.status) {
