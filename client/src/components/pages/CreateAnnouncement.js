@@ -3,16 +3,18 @@ import axios from 'axios';
 import { announcementRoute } from '../../utils/APIRoutes';
 import Navbar from '../Navbar';
 import '../css/CreateAnnouncement.css';
-import { getUser, isUserLogged } from '../../utils/UserUtils';
+import { getToken, getUser, isUserLogged } from '../../utils/UserUtils';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { genericToastOptions } from '../../utils/Globals';
+import { genericToastOptions, successToastOptions } from '../../utils/Globals';
+import { useNavigate } from 'react-router-dom';
 
 function CreateAnnouncement() {
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
     const [content, setContent] = useState('');
     const [author, setAuthor] = useState('');
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         title: "",
@@ -24,10 +26,10 @@ function CreateAnnouncement() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: value,
+            ...prevFormData,
+            [name]: value,
         }));
-      };
+    };
 
     console.log("CreateAnnouncement");
     console.log("isLoggedIn", isUserLogged());
@@ -37,7 +39,7 @@ function CreateAnnouncement() {
             setFormData((prevFormData) => ({
                 ...prevFormData,
                 author: getUser().username,
-              }));
+            }));
         }
         console.log('formData:', formData);
     }, []);
@@ -54,18 +56,23 @@ function CreateAnnouncement() {
                 formData.image = imageData;
                 formData.author = getUser().username;
                 console.log('formData:', formData);
-                axios.post(announcementRoute, formData)
+                axios.post(announcementRoute, formData, {
+                    headers: {
+                        Authorization: "Bearer " + getToken()
+                    },
+                })
                     .then((response) => {
                         console.log('respStatus:', response.data.status);
                         if (response.data.status === false) {
                             toast.error("Failed to create announcement! " + response.data.msg, genericToastOptions);
                         } else {
-                            toast.success("Announcement created successfully!", genericToastOptions);
+                            toast.success("Announcement created successfully!", successToastOptions);
+                            navigate("/announcements");
                         }
                     })
                     .catch((error) => {
-                        console.error('Error:', error.message);
-                        toast.error("Error", genericToastOptions);
+                        console.error('Error:', error);
+                        toast.error("Error"+error.message+" "+error.code, genericToastOptions);
                     });
             }
             reader.readAsDataURL(image); // Read the image file as a data URL            
