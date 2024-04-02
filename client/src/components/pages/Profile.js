@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { genericToastOptions } from "../../utils/Globals";
 import Navbar from "../Navbar";
-import { getUser } from "../../utils/UserUtils";
+import { getToken, getUser } from "../../utils/UserUtils";
 
 function Profile() {
   const [profileData, setProfileData] = useState({
@@ -24,7 +24,11 @@ function Profile() {
   const fetchProfileData = async () => {
     console.log("fetchProfileData" + userId);
     try {
-      const response = await axios.get(userRoute + "/" + getUser()._id);
+      const response = await axios.get(userRoute + "/" + getUser()._id, {
+        headers: {
+          Authorization: "Bearer " + getToken()      
+        },
+      });
       setProfileData(response.data);
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -75,7 +79,11 @@ function Profile() {
     };
     console.log("updateData:", updateData);
     try {
-      const response = await axios.put(`${userRoute}/${userId}`, updateData);
+      const response = await axios.put(`${userRoute}/${userId}`, updateData, {
+        headers: {
+          Authorization: "Bearer " + getToken()
+        }
+      });
       console.log("response:", response);
       //toast.success('Profile updated successfully.');
       if (response.data.status) {

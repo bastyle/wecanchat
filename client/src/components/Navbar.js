@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import avatar from "../assets/default_avatar.png";
-import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
-import {logoutRoute} from "../utils/APIRoutes";
+import { Link, useNavigate } from "react-router-dom";
+import { getToken, isUserLogged, logoutUser } from "../utils/UserUtils";
 
 
 function Navbar() {
-    const isLoggedIn = JSON.parse(localStorage.getItem("user")) ? true : false;
+    const isLoggedIn = isUserLogged(); 
     //const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
     const navigate = useNavigate();
@@ -15,8 +14,7 @@ function Navbar() {
     const handleLogOut = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(logoutRoute + "/" + JSON.parse(localStorage.getItem("user"))._id);
-            localStorage.clear();
+            logoutUser();
             navigate("/");
         } catch (error) {
             console.error("Login error:", error);
@@ -60,13 +58,9 @@ function Navbar() {
         }
     }
 
-   /* function localShowNotification() {
-        showNotification("Hello! Just checking in.");
-
-    }*/
-
     useEffect(() => {
         askNotificationPermission();
+        getToken();        
     }, []);
 
 

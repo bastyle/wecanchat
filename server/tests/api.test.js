@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../index'); // Import your Express app
+let jwtToken; 
 
 describe('API Health endpoint', () => {
   it('should check the health endpoint', async () => {
@@ -11,12 +12,18 @@ describe('API Health endpoint', () => {
   }, 10000);
 });
 
-describe('API Users Routes', () => {
-  it('should check the getAllUsers endpoint', async () => {
-    const res = await request(app)
-      .get('/api/auth/allusers');
-    expect(res.statusCode).toEqual(200);
-  });
+
+it('should check incorrect login endpoint', async () => {
+  const res = await request(app)
+    .post('/api/auth/login')
+    .send({
+      username: 'xxx',
+      password: 'xxx'
+    });
+  expect(res.statusCode).toEqual(200);
+  //console.log(res.body);
+  expect(res.body).toHaveProperty('status', false);
+});
 
   it('should check the login endpoint', async () => {
     const res = await request(app)
@@ -27,20 +34,20 @@ describe('API Users Routes', () => {
       });
     expect(res.statusCode).toEqual(200);
     //console.log(res.body);
+    jwtToken = res.body.token;
+    //console.log(jwtToken);
     expect(res.body).toHaveProperty('status', true);
   });
 
-  it('should check incorrect login endpoint', async () => {
-    const res = await request(app)
-      .post('/api/auth/login')
-      .send({
-        username: 'xxx',
-        password: 'xxx'
-      });
-    expect(res.statusCode).toEqual(200);
-    //console.log(res.body);
-    expect(res.body).toHaveProperty('status', false);
-  });
+  describe('API Users Routes', () => {
+    console.log("jwtToken:: "+jwtToken);
+    it('should check the getAllUsers endpoint', async () => {
+      const res = await request(app)
+        .get('/api/auth/allusers')
+        .set('Authorization', `Bearer ${jwtToken}`);
+      expect(res.statusCode).toEqual(200);
+    });
+
 
   it('should check the logout endpoint', async () => {
     const res = await request(app)
@@ -70,8 +77,9 @@ describe('API Users Routes', () => {
   it('should get user details', async () => {
     const userId = '123456'; 
     const res = await request(app)
-      .get(`/api/auth/user/${userId}`);
-    console.log(res.body);
+      .get(`/api/auth/user/${userId}`)
+      .set('Authorization', `Bearer ${jwtToken}`);
+    //console.log(res.body);
     expect(res.statusCode).toEqual(400);
     expect(res.body).toHaveProperty('msg', "Invalid user ID");
   });
