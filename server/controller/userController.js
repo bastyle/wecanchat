@@ -167,6 +167,8 @@ module.exports.getAllUsers = async (req, res, next) => {
       "profileId", // 0 regular user, 1 admin
       "email",
       "username",
+      "firstName",
+      "lastName",
       "avatarImage",
     ]);
     return res.json(users);
