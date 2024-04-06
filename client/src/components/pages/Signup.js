@@ -66,7 +66,7 @@ function SignUp() {
     theme: "light",
     onClose: () => {
       //console.log("Redirecting to /announcements");
-      navigate("/announcements");
+      navigate("/login");
     }
   };
 
@@ -111,7 +111,7 @@ function SignUp() {
           console.log('false.......:' + response.data.msg);
           toast.error(response.data.msg, genericToastOptions);
         } else {
-          localStorage.setItem('user',JSON.stringify(response.data.user));
+          //localStorage.setItem('user',JSON.stringify(response.data.user));
           toast.success("Registered successfully!", successToastOptions);
         }
       })

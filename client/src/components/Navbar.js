@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import avatar from "../assets/default_avatar.png";
 import { Link, useNavigate } from "react-router-dom";
-import { getToken, isUserLogged, logoutUser } from "../utils/UserUtils";
+import { getToken, isAdminUser, isUserLogged, logoutUser } from "../utils/UserUtils";
 
 
 function Navbar() {
-    const isLoggedIn = isUserLogged(); 
-    //const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
+    const isLoggedIn = isUserLogged();
+    const isAdmin = isAdminUser();
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
     const navigate = useNavigate();
     const [showNotificationBtn, setShowNotificationBtn] = useState(false);
@@ -60,15 +60,15 @@ function Navbar() {
 
     useEffect(() => {
         askNotificationPermission();
-        getToken();        
+        getToken();
     }, []);
 
 
     if (isLoggedIn) {
         return (
-            <div className="main-container">
-                <nav>
-                    <p className={avatar}>
+            <div >
+                <div className="avatar-container">
+                    <p className={`${avatar} avatar-left`}>
                         <img
                             className="avatar_icon"
                             src={`data:image/svg+xml;base64,${JSON.parse(localStorage.getItem("user")).avatarImage || avatar}`}
@@ -79,32 +79,41 @@ function Navbar() {
                         />
                         {JSON.parse(localStorage.getItem("user")).username}
                     </p>
-                    <div
-                        className="mobile-nav"
-                        onClick={() => {
-                            setMobileNavOpen(!mobileNavOpen);
-                        }}
-                    >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul className={mobileNavOpen ? "open" : ""}>
-                        <li>
-                            <Link to="/chat">Chat</Link>
-                        </li>
-                        <li>
-                            <Link to="/announcements">Announcements</Link>
-                        </li>
-                        <li>
-                            <Link to="/profile">Profile</Link>
-                        </li>
-                        <li>
-                            <Link to="/" onClick={handleLogOut}>Logout</Link>
-                        </li>
+                </div>
+                <div className="main-container">
+                    <nav>
+                        <div
+                            className="mobile-nav"
+                            onClick={() => {
+                                setMobileNavOpen(!mobileNavOpen);
+                            }}
+                        >
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <ul className={mobileNavOpen ? "open" : ""}>
+                            <li>
+                                <Link to="/chat">Chat</Link>
+                            </li>
+                            <li>
+                                <Link to="/announcements">Announcements</Link>
+                            </li>
+                            <li>
+                                <Link to="/profile">Profile</Link>
+                            </li>
+                            {isAdmin && (
+                                <li>
+                                    <Link to="/admin">Admin</Link>
+                                </li>
+                            )}
+                            <li>
+                                <Link to="/" onClick={handleLogOut}>Logout</Link>
+                            </li>
 
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         );
     } else {

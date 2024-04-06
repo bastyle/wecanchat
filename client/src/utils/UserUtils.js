@@ -1,9 +1,10 @@
 import axios from "axios";
 import { logoutRoute } from "./APIRoutes";
+import { jwtDecode } from 'jwt-decode';
 
 export function getToken() {
     const token = JSON.parse(localStorage.getItem("token"));
-    console.log("getToken", token);
+    //console.log("getToken", token);
     return token ? token : null; 
 }
 
@@ -27,7 +28,7 @@ export function isUserLogged() {
 
 export function isAdminUser() {
     if (!isUserLogged) return false;
-    return getUser().profileId == 1 ? true : false;
+    return getUser().profileId === 1;
 }
 
 export async function logoutUser() {
@@ -41,4 +42,13 @@ export function login(data) {
     localStorage.setItem('userId', JSON.stringify(data.user._id));
     localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", JSON.stringify(data.token));
+}
+
+export function loginUpdate(data) {
+    const token = data.token;
+    const decodedToken = jwtDecode(token);
+    console.log("decodedToken in loginUpdate:", decodedToken);
+    localStorage.setItem('userId', JSON.stringify(decodedToken.userId));
+    localStorage.setItem("user", JSON.stringify(decodedToken.user));
+    localStorage.setItem("token", JSON.stringify(token));
 }

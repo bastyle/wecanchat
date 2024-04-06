@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { genericToastOptions } from "../../utils/Globals";
 import Navbar from "../Navbar";
-import { getToken, getUser } from "../../utils/UserUtils";
+import { getToken, getUser, login, loginUpdate } from "../../utils/UserUtils";
 
 function Profile() {
   const [profileData, setProfileData] = useState({
@@ -92,6 +92,8 @@ function Profile() {
       }else{
         toast.error("Error updating profile: "+response.data.msg, genericToastOptions);
       }
+      loginUpdate(response.data);
+      goBack();
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error("Failed to update profile.", genericToastOptions);
@@ -133,9 +135,9 @@ function Profile() {
             <label>Username</label>
             <input
               type="text"
-              name="name"
-              value={profileData.username}
-              disabled={true}
+              name="username"
+              required
+              value={profileData.username}              
               onChange={handleChange}
             />
           </div>
