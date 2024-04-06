@@ -1,18 +1,19 @@
 /* Container styles */
 .container {
     width: 100%;
-    height: 100%;
-    background-color: #f9f9f9;
     padding: 20px;
     box-sizing: border-box;
     text-align: center; /* Add this line to center the content */
 }
 
 .admin-container {
-    background-color: #e2e0e0;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #eeebeb;
     border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 20px;    
+    margin-bottom:1.5rem;
+    margin-top: 1.5rem;    
 }
 
 /* Heading styles */
