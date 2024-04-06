@@ -297,3 +297,24 @@ module.exports.updUser = async (req, res, next) => {
     next(ex);
   }
 }
+
+exports.deleteUser = async (req, res, next) => {
+  try {
+    console.log("deleteUser endpoint...");
+    console.log("req.profileId : " + req.profileId);
+    
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found', status: false });
+    }
+
+    await User.findByIdAndDelete(id);
+
+    return res.json({ msg: 'User deleted successfully', status: true });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Error deleting user', status: false });
+  }
+};

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { allUsersRoute } from '../../utils/APIRoutes';
+import { allUsersRoute, userRoute } from '../../utils/APIRoutes';
 import { getToken } from '../../utils/UserUtils';
 import "../css/UsersMaitainer.css";
 import Navbar from '../Navbar';
 import { MdEditSquare, MdDelete } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { successToastOptions } from '../../utils/Globals';
 
 const UserMaintainer = () => {
     const [users, setUsers] = useState([]);
@@ -13,7 +17,6 @@ const UserMaintainer = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-
             try {
                 const response = await axios.get(`${allUsersRoute}`, {
                     headers: {
@@ -59,14 +62,35 @@ const UserMaintainer = () => {
             });
     };
 
-    const handleUserDelete = () => {
-        // Replace with your API endpoint
-        axios.delete(`/api/users/${selectedUser.id}`)
-            .then(response => {
-                // Remove the user from the users array
-                setUsers(users.filter(user => user.id !== selectedUser.id));
-                setSelectedUser(null);
-            });
+
+    // ...
+
+    const handleUserDelete = (userDel) => {
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: `Are you sure you want to delete ${userDel.username} ?`,
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        axios.delete(userRoute + `/${userDel._id}`, {
+                            headers: {
+                                Authorization: "Bearer " + getToken()
+                            }
+                        })
+                            .then(response => {
+                                setUsers(users.filter(user => user._id !== userDel._id));
+                                setSelectedUser(null);
+                                toast.success("User deleted successfully", successToastOptions);
+                            });
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => { }
+                }
+            ]
+        });
     };
 
     return (
@@ -95,9 +119,9 @@ const UserMaintainer = () => {
                                         <td><input type="text" className="users-input" value={selectedUser.firstName} onChange={(e) => handleInputChange('firstName', e)} /></td>
                                         <td><input type="text" className="users-input" value={selectedUser.lastName} onChange={(e) => handleInputChange('lastName', e)} /></td>
                                         <td className="email-column">
-                                            <input type="text"  className="users-input" value={selectedUser.email} onChange={(e) => handleInputChange('email', e)} />
+                                            <input type="text" className="users-input" value={selectedUser.email} onChange={(e) => handleInputChange('email', e)} />
                                         </td>
-                                        <td><input type="checkbox"  className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleInputChange('profileId', e.target.checked ? 1 : 0)} /></td>
+                                        <td><input type="checkbox" className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleInputChange('profileId', e.target.checked ? 1 : 0)} /></td>
                                     </>
                                 ) : (
                                     <>
@@ -105,7 +129,7 @@ const UserMaintainer = () => {
                                         <td>{user.firstName}</td>
                                         <td>{user.lastName}</td>
                                         <td className="email-column">{user.email}</td>
-                                        <td className='checkbox'><input type="checkbox"  checked={user.profileId === 1} disabled /></td>
+                                        <td className='checkbox'><input type="checkbox" checked={user.profileId === 1} disabled /></td>
                                     </>
                                 )}
                                 <td>

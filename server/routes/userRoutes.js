@@ -7,6 +7,7 @@ const {
     setAvatar,
     getAllUsersById,
     updUser,
+    deleteUser,
   } = require("../controller/userController");
 const auth = require("../middleware/auth");
   
@@ -20,5 +21,6 @@ const auth = require("../middleware/auth");
   router.put("/user/:id", auth, updUser);
   router.get("/logout/:id", logOut);
   router.post("/setavatar/:id", setAvatar);
+  router.delete("/user/:id", auth, deleteUser);
   
   module.exports = router;
