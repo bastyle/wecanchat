@@ -9,7 +9,7 @@ import { FaSave } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { successToastOptions } from '../../utils/Globals';
+import { genericToastOptions, successToastOptions } from '../../utils/Globals';
 
 const UserMaintainer = () => {
     const [users, setUsers] = useState([]);
@@ -61,6 +61,9 @@ const UserMaintainer = () => {
 
     const handleUserUpdate = () => {
         console.log("selectedUser", selectedUser);
+        if (!validateInputs()) {    
+            return;
+        }
         // Replace with your API endpoint
         axios.put(`${userRoute}/${selectedUser._id}`, selectedUser, {
             headers: {
@@ -104,6 +107,24 @@ const UserMaintainer = () => {
         });
     };
 
+    const validateInputs = () => {
+        const { username, firstName, lastName, email, profileId } = selectedUser;
+
+        if (!username || !firstName || !lastName || !email || profileId === undefined) {
+            let message = 'Please fill in the following fields: ';
+            message += !username ? 'username, ' : '';
+            message += !firstName ? 'first name, ' : '';
+            message += !lastName ? 'last name, ' : '';
+            message += !email ? 'email, ' : '';
+            message += profileId === undefined ? 'profileId, ' : '';
+            message = message.slice(0, -2) + '.';
+            toast.error(message, genericToastOptions);
+            return false;
+        }
+
+        return true;
+    };
+
     return (
         <div className="users-container">
             <div>
@@ -126,13 +147,13 @@ const UserMaintainer = () => {
                             <tr key={user._id}>
                                 {selectedUser && selectedUser._id === user._id ? (
                                     <>
-                                        <td><input type="text" className="users-input" value={selectedUser.username} onChange={(e) => handleInputChange('username', e)} /></td>
-                                        <td><input type="text" className="users-input" value={selectedUser.firstName} onChange={(e) => handleInputChange('firstName', e)} /></td>
-                                        <td><input type="text" className="users-input" value={selectedUser.lastName} onChange={(e) => handleInputChange('lastName', e)} /></td>
+                                        <td><input type="text" required className="users-input" value={selectedUser.username} onChange={(e) => handleInputChange('username', e)} /></td>
+                                        <td><input type="text" required className="users-input" value={selectedUser.firstName} onChange={(e) => handleInputChange('firstName', e)} /></td>
+                                        <td><input type="text" required className="users-input" value={selectedUser.lastName} onChange={(e) => handleInputChange('lastName', e)} /></td>
                                         <td className="email-column">
-                                            <input type="text" className="users-input" value={selectedUser.email} onChange={(e) => handleInputChange('email', e)} />
+                                            <input type="text" required className="users-input" value={selectedUser.email} onChange={(e) => handleInputChange('email', e)} />
                                         </td>
-                                        <td><input type="checkbox" className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleCheckChange('profileId', e.target.checked ? 1 : 0)} /></td>
+                                        <td><input type="checkbox" required className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleCheckChange('profileId', e.target.checked ? 1 : 0)} /></td>
                                     </>
                                 ) : (
                                     <>
