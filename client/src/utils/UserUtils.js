@@ -28,7 +28,7 @@ export function isUserLogged() {
 
 export function isAdminUser() {
     if (!isUserLogged) return false;
-    return getUser().profileId == 1 ? true : false;
+    return getUser().profileId === 1;
 }
 
 export async function logoutUser() {

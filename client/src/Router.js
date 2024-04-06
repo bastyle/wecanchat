@@ -10,6 +10,7 @@ import Login from "./components/pages/Login"; // This is the Homepage/Startpage
 
 import CreateAnnouncement from './components/pages/CreateAnnouncement';
 import ChatView from './components/new-chat/ChatView';
+import Admin from './components/admin/Admin';
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/chat" element={<ChatView/>} />
+        <Route path="/admin" element={<Admin/>} />
         <Route path="/" element={<Home/>} />
       </Routes>
   );

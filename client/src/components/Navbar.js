@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./css/Navbar.css";
 import avatar from "../assets/default_avatar.png";
 import { Link, useNavigate } from "react-router-dom";
-import { getToken, isUserLogged, logoutUser } from "../utils/UserUtils";
+import { getToken, isAdminUser, isUserLogged, logoutUser } from "../utils/UserUtils";
 
 
 function Navbar() {
     const isLoggedIn = isUserLogged(); 
-    //const isAdminUser = isLoggedIn && JSON.parse(localStorage.getItem("user")).profileId == 1 ? true : false;
+    const isAdmin = isAdminUser();
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
     const navigate = useNavigate();
     const [showNotificationBtn, setShowNotificationBtn] = useState(false);
@@ -99,6 +99,11 @@ function Navbar() {
                         <li>
                             <Link to="/profile">Profile</Link>
                         </li>
+                        {isAdmin && (
+                            <li>
+                                <Link to="/admin">Admin</Link>
+                            </li>
+                        )}
                         <li>
                             <Link to="/" onClick={handleLogOut}>Logout</Link>
                         </li>
