@@ -4,8 +4,8 @@ import { allUsersRoute } from '../../utils/APIRoutes';
 import { getToken } from '../../utils/UserUtils';
 import "../css/UsersMaitainer.css";
 import Navbar from '../Navbar';
-import { FaEdit } from "react-icons/fa";
 import { MdEditSquare, MdDelete } from "react-icons/md";
+import { FaSave } from "react-icons/fa";
 
 const UserMaintainer = () => {
     const [users, setUsers] = useState([]);
@@ -31,10 +31,17 @@ const UserMaintainer = () => {
         fetchData();
     }, []);
 
-    const handleInputChange = (event) => {
+    /* const handleInputChange = (event) => {
+         setSelectedUser({
+             ...selectedUser,
+             [event.target.name]: event.target.value
+         });
+     };*/
+
+    const handleInputChange = (property, value) => {
         setSelectedUser({
             ...selectedUser,
-            [event.target.name]: event.target.value
+            [property]: value
         });
     };
 
@@ -68,15 +75,6 @@ const UserMaintainer = () => {
                 <Navbar />
             </div>
             <div className="sub-container">
-                {selectedUser && (
-                    <div>
-                        <input className="users-input" name="username" value={selectedUser.username} onChange={handleInputChange} />
-                        <input className="users-input" name="name" value={selectedUser.name} onChange={handleInputChange} />
-                        <input className="users-input" name="lastname" value={selectedUser.lastname} onChange={handleInputChange} />
-                        <input className="users-input" name="profileId" value={selectedUser.profileId} onChange={handleInputChange} />
-                        <button className="users-button" onClick={handleUserUpdate}>Submit</button>
-                    </div>
-                )}
                 <table className="users-table">
                     <thead>
                         <tr>
@@ -90,16 +88,39 @@ const UserMaintainer = () => {
                     </thead>
                     <tbody>
                         {users.map(user => (
-                            <tr key={user.id}>
-                                <td>{user.username}</td>
-                                <td>{user.firstName}</td>
-                                <td>{user.lastName}</td>
-                                <td>{user.email}</td>
-                                <td>{user.profileId}</td>
+                            <tr key={user._id}>
+                                {selectedUser && selectedUser._id === user._id ? (
+                                    <>
+                                        <td><input type="text" className="users-input" value={selectedUser.username} onChange={(e) => handleInputChange('username', e)} /></td>
+                                        <td><input type="text" className="users-input" value={selectedUser.firstName} onChange={(e) => handleInputChange('firstName', e)} /></td>
+                                        <td><input type="text" className="users-input" value={selectedUser.lastName} onChange={(e) => handleInputChange('lastName', e)} /></td>
+                                        <td className="email-column">
+                                            <input type="text"  className="users-input" value={selectedUser.email} onChange={(e) => handleInputChange('email', e)} />
+                                        </td>
+                                        <td><input type="checkbox"  className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleInputChange('profileId', e.target.checked ? 1 : 0)} /></td>
+                                    </>
+                                ) : (
+                                    <>
+                                        <td>{user.username}</td>
+                                        <td>{user.firstName}</td>
+                                        <td>{user.lastName}</td>
+                                        <td className="email-column">{user.email}</td>
+                                        <td className='checkbox'><input type="checkbox"  checked={user.profileId === 1} disabled /></td>
+                                    </>
+                                )}
                                 <td>
                                     <div style={{ display: 'flex', justifyContent: 'space-evenly', padding: '.2rem' }}>
                                         <MdEditSquare style={{ color: 'blue' }} onClick={() => handleUserSelect(user)} />
                                         <MdDelete style={{ color: 'red' }} onClick={() => handleUserDelete(user)} />
+                                        {selectedUser && selectedUser._id === user._id ? (
+                                            <>
+                                                <FaSave style={{ color: 'green' }} onClick={() => handleUserUpdate} />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <td><span>-</span></td>
+                                            </>
+                                        )}
                                     </div>
                                 </td>
                             </tr>
