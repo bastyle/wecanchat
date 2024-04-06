@@ -34,30 +34,41 @@ const UserMaintainer = () => {
         fetchData();
     }, []);
 
-    /* const handleInputChange = (event) => {
-         setSelectedUser({
-             ...selectedUser,
-             [event.target.name]: event.target.value
-         });
-     };*/
-
-    const handleInputChange = (property, value) => {
+   /* const handleInputChange = (property, value) => {
         setSelectedUser({
             ...selectedUser,
             [property]: value
         });
-    };
+    };*/
+
+    const handleInputChange = (property, event) => {
+        setSelectedUser({
+          ...selectedUser,
+          [property]: event.target.value
+        });
+      };
+
+      const handleCheckChange = (property, value) => {
+        setSelectedUser({
+          ...selectedUser,
+          [property]: value
+        });
+      };
 
     const handleUserSelect = (user) => {
         setSelectedUser(user);
     };
 
     const handleUserUpdate = () => {
+        console.log("selectedUser", selectedUser);
         // Replace with your API endpoint
-        axios.put(`/api/users/${selectedUser._id}`, selectedUser)
+        axios.put(`${userRoute}/${selectedUser._id}`, selectedUser, {
+            headers: {
+                Authorization: "Bearer " + getToken()
+            }
+        })
             .then(response => {
-                // Update the user in the users array
-                setUsers(users.map(user => user.id === selectedUser.id ? selectedUser : user));
+                setUsers(users.map(user => user._id === selectedUser._id ? selectedUser : user));
                 setSelectedUser(null);
             });
     };
@@ -121,7 +132,7 @@ const UserMaintainer = () => {
                                         <td className="email-column">
                                             <input type="text" className="users-input" value={selectedUser.email} onChange={(e) => handleInputChange('email', e)} />
                                         </td>
-                                        <td><input type="checkbox" className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleInputChange('profileId', e.target.checked ? 1 : 0)} /></td>
+                                        <td><input type="checkbox" className="users-input" checked={selectedUser.profileId === 1} onChange={(e) => handleCheckChange('profileId', e.target.checked ? 1 : 0)} /></td>
                                     </>
                                 ) : (
                                     <>
@@ -138,7 +149,7 @@ const UserMaintainer = () => {
                                         <MdDelete style={{ color: 'red' }} onClick={() => handleUserDelete(user)} />
                                         {selectedUser && selectedUser._id === user._id ? (
                                             <>
-                                                <FaSave style={{ color: 'green' }} onClick={() => handleUserUpdate} />
+                                                <FaSave style={{ color: 'green' }} onClick={() => handleUserUpdate(user)}/>
                                             </>
                                         ) : (
                                             <>
