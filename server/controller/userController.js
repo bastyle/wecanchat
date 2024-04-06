@@ -144,6 +144,7 @@ module.exports.getUser = async (req, res, next) => {
         "firstName",
         "lastName",
         "_id",
+        "profileId"
       ]);
 
       if (!user) {
@@ -213,7 +214,7 @@ module.exports.setAvatar = async (req, res, next) => {
 module.exports.updUser = async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const { firstName, lastName, email, currentPassword, newPassword, avatarImage, _id } = req.body;
+    const { firstName, lastName, email, currentPassword, newPassword, avatarImage, _id, username, profileId } = req.body;
 
     if (!ObjectId.isValid(_id)) {
       return res.status(400).json({ msg: 'Invalid user ID' });
@@ -227,42 +228,64 @@ module.exports.updUser = async (req, res, next) => {
       "_id",
     ]);
 
-    //console.log("user??: " + userAux)
+    console.log("user??: " + userAux)
     if (!userAux) {
       return res.json({ msg: "Incorrect Not Found!", status: false });
     }
     if (!newPassword || newPassword === "") {
       console.log("No Password");
-      const user = await User.findByIdAndUpdate(
-        _id,
-        {
-          firstName,
-          lastName,
-          email,
-          avatarImage,
-        },
-        { new: true }
-      );
-      return res.json({ msg: "User Update successfully!", status: true });
+      try {
+        const user = await User.findByIdAndUpdate(
+          _id,
+          {
+            firstName,
+            lastName,
+            email,
+            avatarImage,
+            username,
+            profileId
+          },
+          { new: true }
+        );
+        return res.json({ msg: "User Update successfully!", status: true });
+      } catch (error) {
+        console.log(error)
+        if(error.codeName === "DuplicateKey" || error.codeName === 11000){
+          return res.json({ msg: "Username or Email already used!", status: false });
+        }else{
+          return res.json({ msg: "error updating user: "+error.codeName, status: false });
+        }        
+      }
+      
     } else {
       const isPasswordValid = await bcrypt.compare(currentPassword, userAux.password);
       if (!isPasswordValid) {
         console.log("Incorrect Password")
         return res.json({ msg: "Current Password Invalid!", status: false });
+      }             
+      try {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const user = await User.findByIdAndUpdate(
+          _id,
+          {
+            firstName,
+            lastName,
+            email,
+            avatarImage,
+            password: hashedPassword,
+            profileId
+          },
+          { new: true }
+        );
+        return res.json({ msg: "User Update successfully!", status: true });
+      } catch (error) {
+        console.log(error)
+        if(error.codeName === "DuplicateKey" || error.codeName === 11000){
+          return res.json({ msg: "Username or Email already used!", status: false });
+        }else{
+          return res.json({ msg: "error updating user: "+error.codeName, status: false });
+        }        
       }
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-      const user = await User.findByIdAndUpdate(
-        _id,
-        {
-          firstName,
-          lastName,
-          email,
-          password: hashedPassword,
-          avatarImage,
-        },
-        { new: true }
-      );
-      return res.json({ msg: "User Update successfully!", status: true });
     }
   } catch (ex) {
     next(ex);
