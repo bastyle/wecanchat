@@ -23,12 +23,7 @@ function Announcements() {
       <Navbar />
       <div className="main-container">
         <div className="Announcements-Header-Box">
-          <h1>Announcements</h1>
-          {isAdminUser && (
-            <h3>
-            <Link to="/add/announcement">Add new Announcement</Link>
-            </h3>
-          )}
+          <h1>Announcements</h1>         
         </div>
 
         <div className="Announcements">

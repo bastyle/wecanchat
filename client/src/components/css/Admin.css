@@ -1,0 +1,84 @@
+/* Container styles */
+.container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center; /* Add this line to center the content */
+}
+
+.admin-container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #eeebeb;
+    border-radius: 5px;
+    padding: 20px;    
+    margin-bottom:1.5rem;
+    margin-top: 1.5rem;    
+}
+
+/* Heading styles */
+.admin-heading {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h1.admin-heading {
+    font-size: 32px;
+}
+
+h2.admin-heading {
+    font-size: 28px;
+}
+
+h3.admin-heading {
+    font-size: 24px;
+}
+
+/* Table styles */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* List styles */
+.admin-list {
+    list-style-type: none;
+    padding: 0;
+    /*text-align: left; /* Add this line to align elements to the left */
+}
+
+.admin-list li {
+    padding: 10px 0;
+    
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-list li:last-child {
+    border-bottom: none;
+}
+
+/* Link styles */
+.admin-link {
+    color: #9a6cef;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.admin-link:hover {
+    color: #5e1bd8;
+}
+
+.admin-link:focus {
+    outline: none;
+    color: #666;
+}
+
+.admin-link:active {
+    color: #000;
+}
