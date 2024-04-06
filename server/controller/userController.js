@@ -226,12 +226,14 @@ module.exports.updUser = async (req, res, next) => {
       "avatarImage",
       "password",
       "_id",
+      "profileId"
     ]);
 
     console.log("user??: " + userAux)
     if (!userAux) {
       return res.json({ msg: "Incorrect Not Found!", status: false });
     }
+    
     if (!newPassword || newPassword === "") {
       console.log("No Password");
       try {
@@ -247,7 +249,8 @@ module.exports.updUser = async (req, res, next) => {
           },
           { new: true }
         );
-        return res.json({ msg: "User Update successfully!", status: true });
+        const token = jwt.sign({ userId: userAux._id, profile: userAux.profileId, username: username, user: user }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        return res.json({ msg: "User Update successfully!", status: true, token: token});
       } catch (error) {
         console.log(error)
         if(error.codeName === "DuplicateKey" || error.codeName === 11000){
@@ -277,7 +280,8 @@ module.exports.updUser = async (req, res, next) => {
           },
           { new: true }
         );
-        return res.json({ msg: "User Update successfully!", status: true });
+        const token = jwt.sign({ userId: userAux._id, profile: userAux.profileId, username: username, user: user }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        return res.json({ msg: "User Update successfully!", status: true , token: token});
       } catch (error) {
         console.log(error)
         if(error.codeName === "DuplicateKey" || error.codeName === 11000){
