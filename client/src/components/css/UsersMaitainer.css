@@ -1,0 +1,93 @@
+/* Container styles */
+.users-container {
+    width: 100%;       
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center; /* Add this line to center the content */
+}
+
+.sub-container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #eeebeb;
+    border-radius: 5px;
+    padding: 20px;    
+    margin-bottom: 20px;
+}
+
+/* Heading styles */
+.users-heading {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h1.users-heading {
+    font-size: 32px;
+}
+
+h2.users-heading {
+    font-size: 28px;
+}
+
+h3.users-heading {
+    font-size: 24px;
+}
+
+/* Table styles */
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center; /* Add this line to center the content */
+}
+
+.users-table th {
+    border: .5px solid #ddd;
+    padding: 4px;
+    color: #333;
+}
+
+.users-table td {
+    border: .5px solid #ddd;
+    padding: 4px;
+    color: #333;
+}
+
+/* List styles */
+.users-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.users-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.users-list li:last-child {
+    border-bottom: none;
+}
+
+/* Input styles */
+.users-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Button styles */
+.users-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.users-button:hover {
+    background-color: #0056b3;
+}
+
