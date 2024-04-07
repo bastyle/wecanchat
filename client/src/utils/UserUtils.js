@@ -23,11 +23,12 @@ export function getUser() {
 
 export function isUserLogged() {
     const user = getUser();
+    //console.log("isUserLogged user:", user);
     return user ? true : false;
 }
 
 export function isAdminUser() {
-    if (!isUserLogged) return false;
+    if (!isUserLogged()) return false;
     return getUser().profileId === 1;
 }
 
@@ -47,7 +48,7 @@ export function login(data) {
 export function loginUpdate(data) {
     const token = data.token;
     const decodedToken = jwtDecode(token);
-    console.log("decodedToken in loginUpdate:", decodedToken);
+    //console.log("decodedToken in loginUpdate:", decodedToken);
     localStorage.setItem('userId', JSON.stringify(decodedToken.userId));
     localStorage.setItem("user", JSON.stringify(decodedToken.user));
     localStorage.setItem("token", JSON.stringify(token));
