@@ -1,8 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import '../css/Homepage.css';
+import { isUserLogged } from '../../utils/UserUtils';
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 
 function Homepage() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (isUserLogged()) {
+            console.log("User is logged in, redirecting to chat");
+            navigate("/chat");
+        }
+    }, []);
+
     return (
         <div className="homepage">
             <h1 className="title">WeCanChat!</h1>
