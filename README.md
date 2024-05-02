@@ -1,4 +1,4 @@
-# WeCanChat (comp313-group-project)
+# WeCanChat 
 
 ## chat in real time application
 
