@@ -30,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"raw": "{\r\n   \"username\":\"testUser\",\r\n   \"email\": \"testUser.bastias@gmail.com\",\r\n   \"password\":\"test1234\",\r\n   \"firstName\":\"test\",\r\n   \"lastName\": \"user\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,13 +65,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/auth/register",
+					"raw": "{{url}}/auth/setavatar/",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"auth",
-						"register"
+						"setavatar",
+						""
 					]
 				}
 			},
@@ -84,7 +85,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"raw": "{\r\n   \"source\":\"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzEgMjMxIj48cGF0aCBkPSJNMzMuODMsMzMuODNhMTE1LjUsMTE1LjUsMCwxLDEsMCwxNjMuMzQsMTE1LjQ5LDExNS40OSwwLDAsMSwwLTE2My4zNFoiIHN0eWxlPSJmaWxsOiNhNTAwMDA7Ii8+PHBhdGggZD0ibTExNS41IDUxLjc1YTYzLjc1IDYzLjc1IDAgMCAwLTEwLjUgMTI2LjYzdjE0LjA5YTExNS41IDExNS41IDAgMCAwLTUzLjcyOSAxOS4wMjcgMTE1LjUgMTE1LjUgMCAwIDAgMTI4LjQ2IDAgMTE1LjUgMTE1LjUgMCAwIDAtNTMuNzI5LTE5LjAyOXYtMTQuMDg0YTYzLjc1IDYzLjc1IDAgMCAwIDUzLjI1LTYyLjg4MSA2My43NSA2My43NSAwIDAgMC02My42NS02My43NSA2My43NSA2My43NSAwIDAgMC0wLjA5OTYxIDB6IiBzdHlsZT0iZmlsbDojYjk2NDM4OyIvPjxwYXRoIGQ9Im0xNDEuNzUgMTk1YTExNC43OSAxMTQuNzkgMCAwIDEgMzggMTYuNSAxMTUuNTMgMTE1LjUzIDAgMCAxLTEyOC40NiAwIDExNC43OSAxMTQuNzkgMCAwIDEgMzgtMTYuNWwyNi4yMyAxMyAyNi4yNy0xM3oiIHN0eWxlPSJmaWxsOiMyODIzQzY7Ii8+PHBvbHlnb24gcG9pbnRzPSIxMTUuNSAyMDguMDMgMTE1LjUgMjA3Ljc0IDgyLjcyIDE4OC45MSA4MC40NSAxOTguODYgMTAxLjQ2IDIyMi43MiIgc3R5bGU9ImZpbGw6I2I4ZDBlMDsiLz48cG9seWdvbiBwb2ludHM9IjExNS41IDIwOC4wMyAxMTUuNSAyMDcuNzQgMTQ4LjI4IDE4OC45MSAxNTAuNTUgMTk4Ljg2IDEyOS41NCAyMjIuNzIiIHN0eWxlPSJmaWxsOiNiOGQwZTA7Ii8+PHBhdGggZD0ibTEwOS45OSAxNS41N2MtMTMuNDYgMy42MzAxLTE5Ljc4OSAxMS45NS0yNC4wNjkgMjQuMDgtNi45OTk2LTctOC43MzA3LTEwLjgyLTcuNTYwNi0yMS40M2E0MSA0MSAwIDAgMC05LjI2OTggMjQuOTg4YzAuMDM2NiA3LjY3NzYgNS42NDYyIDEzLjkzOSAxMi42OTcgMTUuMjk3LTEzLjMxNSA1LjgxMDYtMTUuMjU4IDIyLjAzMy0xNC4wNDUgMzMuNTI0IDUuNzY4Ny0xMS44NjEgMTQuMjU0LTIwLjk4MSAyNy4yNTgtMjIuOTUxLTAuNDMwMTcgNi42LTIuNTA5OSAxMC4yMi03LjI5IDE3LjY2IDE4LjI5LTIuODYwMSAyNS4xMTktNy44MTk5IDM3LjE1LTE4LjI0IDAuNDYwMDEgMCAxLjAwMDEgMC4wODkgMS40NjA2IDAuMTIwNTgtMC4zMzAyMyAzLjU2MDEtMS4wOTA2IDYuNTU5OC01LjAwMDQgMTIuNDYgOS41Mjk4LTEuMzIgMTQuNzIxLTUuODAwNiAxNy41MzktMTEuNjcxIDguODg2MiAwLjk1MzE0IDE1LjgzNiA2Ljc4NSAyMS4yNiAxNC44MTggMS45MjgtMTUuMjExLTQuNDc2Ni0yNi42LTE5LjgwNy0zNC4wMzYgMS40MTY3LTIuNjk3NCA4LjAxNDMtMTEuOTI1IDE3LjY2MS0xNS43MjEtMS40MjQtMC4yODU2OS0yLjg4ODMtMC40OTQ4Ni00LjQwMzMtMC42MTEyNS01LjcxLTAuNDE5OTItMTMuNjItMC45OTk4Mi0yNC44OSA0LjE3MDMgMi44NTAxLTguNTEwMSAxMC4yMS0xMSAxOC4wNS0xMy4xMi0xNS4xMzEtMS4yNTAxLTI4LjYxLTIuNTg5OC00MC41MyA4LjE4MDEtMS44OTk3LTYuMjEtMC4xODA1NS0xMi41NCAzLjc4ODktMTcuNTJ6IiBzdHlsZT0iZmlsbDojMDBmZmZkOyIvPjxwYXRoIGQ9Im0xNzIuNjMgNjkuOTU0YzEuMjI5MiAxNC4wNjQgMC45Mzg0MSAyOS45NiAwLjM0NjM1IDQ1LjE2OSAxLjc4ODcgNi43OTYgMy4wMzc5IDEzLjIzNSAzLjg4NDIgMTguMzg4bDAuMTM5NzMtMC4wMTFjMS4wMDAxIDYuNTYgMi4zNTk3IDEzLjE4IDMuMjY5OCAxOS43MyAyLjAwMDItNi41Njk5IDIuNTMwMy0xOC4yNSAzLjI0MDUtMjUuNDMgMS4yNTk3LTEzIDEuODI5Ni0yOS4zMTEtMC40MzAxNy00MS45MzEtMC44NTA0MS00LjcyLTIuMDAwNy03LjY4OTYtMi4wMDA3LTguNDc5NiA0LjYyMDUgMy41NjAxIDguNjYwNiA5LjIyMDQgMTMuMDAxIDE0LjE1LTAuNjc1MS0zLjQzMTgtMS4zNDctNi42MDA0LTIuMDU2Ny05LjUyNzMtNC4wNDctNS43MTgzLTEzLjcyNi0xMi4xNTQtMTkuMzkzLTEyLjA2eiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtMTU3Ljk3IDM0LjQ3MWMtMTAuMzM5IDIuNzU3OS0xNy43MTUgMTMuNTQzLTE5LjEzMiAxNi4yNCAxNS4zMyA3LjQzNjEgMjAuNzgzIDE3Ljk2IDIxLjI3OCAzMy41MTcgNS45NTM0IDguODE3OSAxMC4wNjYgMjAuMjg5IDEyLjg1NyAzMC44OTUgMC44NzYzNi0xMy4xNzggMS44MTg2LTI3LjcyNiAwLjI2NTY2LTQ0LjI4IDIuNTY5OCAwLjQ0ODU3IDkuMTM3MiAxLjM5MzQgMTguNzgxIDExLjE3LTIuMTE1OC04LjczMjEtNC41NjcxLTE1LjMxLTguNDUzOS0yMC4yODMtNC41NTk4LTUuODQwMS0xMC45OTktMTAuNDMxLTIzLjgwOS0xMyA5LjY1MDItMy4zNCAxNi4yNy0wLjc2OTkzIDI1LjUgMi4xMzAxLTguMTM4OC03LjQzMTUtMTYuNDc0LTE0LjIxOS0yNy4yODctMTYuMzg5eiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtNjEuNDczIDczLjM1NGMtNy4yNTYtMC43NzUwMS0xMy4wMjQgMi4zNzQ2LTE2LjI2MiA1LjM4NzkgMC43Mzc4OS0wLjQ1NDA5IDEuMzg2OC0wLjc0MjA4IDEuODQ4OS0wLjc0MjA4IDAgMC0xLjUxOTggMTAuMzU5LTEuNjE5NyAxMS41MTktMS41NiAxOS43MyAwLjk5OTU3IDQzLjQwMSA2LjM3IDYyLjQ3MSAxLjMwOTkgNC42ODk5IDEuMTg5NSAzLjA4OTMgMS44ODk4LTAuOTEwNyAxLjc1MjYtMTAuMDYxIDMuMzg5MS0yNC43MDMgNi45NzM5LTM4Ljg2NC01LjA2OC0xNy42MjctNC4yNTA4LTMyLjQwMyAwLjc5OTM3LTM4Ljg2MXoiIHN0eWxlPSJmaWxsOm5vbmU7Ii8+PHBhdGggZD0ibTY5LjA5IDQzLjIxYy0wLjAyNTMgMS4wODAzLThlLTMgMi4xNjEyIDAuMDUyMyAzLjI0MDItMy44NDAyIDAtMTIuNDYgMC43MTk4NC0xNiAyLjE1OTgtNC40NTA0IDEuODAwMS04LjQ4IDUuNDgwMS0xMS42NyAxMS44MyA3LjI5OTktMy45NCAxMS44OTktMy44NTAyIDE2LjY2LTEuODEwMi0xMC4zOSAzLjQ1LTE5LjUyIDExLjM3LTIwLjMyIDI2LjkgMS4xNDU2LTEuNTA1MyA0LjYwNzktNC45Nzg5IDcuMTM5My02LjYyODUgMC4wOS0wLjA1ODcgMC4xNzQyNy0wLjEwNTU2IDAuMjYxNjctMC4xNTk0NiAzLjcxNDEtMi4zMjExIDkuMDQ5NC01LjEyNDcgMTUuMTgxLTQuOTU1My01LjA1MDEgNi40NTc3LTYuNjgyNCAyMC40MzQgMC4yODIwNyAzOC40MjggMS43ODY2LTcuMDU2NyA0LjA1NzQtMTMuOTk0IDcuMDY4MS0yMC4xODQtMWUtMyAtMTEuNjY0IDIuMDc2NC0yNy43NzQgMTUuMzkxLTMzLjU4NS03LjA1MDgtMi4xNTM4LTEyLjcwOS03Ljk5MS0xNC4wNDMtMTUuMjM2eiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtMTQ1LjM5IDEwNC43LTExLjUyIDExLjJoMTcuMjZtLTY1LjUyLTExLjIgMTEuNTIgMTEuMmgtMTcuMjYiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS13aWR0aDo1LjQ5OThweDtzdHJva2U6IzAwMDsiLz48cGF0aCBkPSJtMTE1LjY4IDE2MC42NGM3LjA4IDAgMTMuMTEtNC45MyAxNS40Ni0xMS44NGEyLjE0IDIuMTQgMCAwIDAtMS41MS0yLjYxMDEgMi4zIDIuMyAwIDAgMC0wLjczOTk1LTAuMDU5M2gtMjYuNDJhMi4xMiAyLjEyIDAgMCAwLTIuMzEgMS45MDk5IDEuODUgMS44NSAwIDAgMCAwLjA1OTMgMC43Mzk5NWMyLjM0MDEgNi45MzAxIDguMzgwMiAxMS44NiAxNS40NiAxMS44NnoiIHN0eWxlPSJmaWxsOiNmZjAwMDA7Ii8+PC9zdmc+\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -92,13 +93,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/auth/register",
+					"raw": "{{url}}/avatar",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"auth",
-						"register"
+						"avatar"
 					]
 				}
 			},
@@ -107,11 +107,21 @@
 		{
 			"name": "add-ann",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"title\":\"ann 1\",\r\n   \"content\": \"content block... jsajs \"   \r\n}",
+					"raw": "{\r\n   \"title\":\"ann 2\",\r\n   \"content\": \"content block... jsajs \"   ,\r\n   \"author\": \"author 2\",\r\n   \"image\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzEgMjMxIj48cGF0aCBkPSJNMzMuODMsMzMuODNhMTE1LjUsMTE1LjUsMCwxLDEsMCwxNjMuMzQsMTE1LjQ5LDExNS40OSwwLDAsMSwwLTE2My4zNFoiIHN0eWxlPSJmaWxsOiNhNTAwMDA7Ii8+PHBhdGggZD0ibTExNS41IDUxLjc1YTYzLjc1IDYzLjc1IDAgMCAwLTEwLjUgMTI2LjYzdjE0LjA5YTExNS41IDExNS41IDAgMCAwLTUzLjcyOSAxOS4wMjcgMTE1LjUgMTE1LjUgMCAwIDAgMTI4LjQ2IDAgMTE1LjUgMTE1LjUgMCAwIDAtNTMuNzI5LTE5LjAyOXYtMTQuMDg0YTYzLjc1IDYzLjc1IDAgMCAwIDUzLjI1LTYyLjg4MSA2My43NSA2My43NSAwIDAgMC02My42NS02My43NSA2My43NSA2My43NSAwIDAgMC0wLjA5OTYxIDB6IiBzdHlsZT0iZmlsbDojYjk2NDM4OyIvPjxwYXRoIGQ9Im0xNDEuNzUgMTk1YTExNC43OSAxMTQuNzkgMCAwIDEgMzggMTYuNSAxMTUuNTMgMTE1LjUzIDAgMCAxLTEyOC40NiAwIDExNC43OSAxMTQuNzkgMCAwIDEgMzgtMTYuNWwyNi4yMyAxMyAyNi4yNy0xM3oiIHN0eWxlPSJmaWxsOiMyODIzQzY7Ii8+PHBvbHlnb24gcG9pbnRzPSIxMTUuNSAyMDguMDMgMTE1LjUgMjA3Ljc0IDgyLjcyIDE4OC45MSA4MC40NSAxOTguODYgMTAxLjQ2IDIyMi43MiIgc3R5bGU9ImZpbGw6I2I4ZDBlMDsiLz48cG9seWdvbiBwb2ludHM9IjExNS41IDIwOC4wMyAxMTUuNSAyMDcuNzQgMTQ4LjI4IDE4OC45MSAxNTAuNTUgMTk4Ljg2IDEyOS41NCAyMjIuNzIiIHN0eWxlPSJmaWxsOiNiOGQwZTA7Ii8+PHBhdGggZD0ibTEwOS45OSAxNS41N2MtMTMuNDYgMy42MzAxLTE5Ljc4OSAxMS45NS0yNC4wNjkgMjQuMDgtNi45OTk2LTctOC43MzA3LTEwLjgyLTcuNTYwNi0yMS40M2E0MSA0MSAwIDAgMC05LjI2OTggMjQuOTg4YzAuMDM2NiA3LjY3NzYgNS42NDYyIDEzLjkzOSAxMi42OTcgMTUuMjk3LTEzLjMxNSA1LjgxMDYtMTUuMjU4IDIyLjAzMy0xNC4wNDUgMzMuNTI0IDUuNzY4Ny0xMS44NjEgMTQuMjU0LTIwLjk4MSAyNy4yNTgtMjIuOTUxLTAuNDMwMTcgNi42LTIuNTA5OSAxMC4yMi03LjI5IDE3LjY2IDE4LjI5LTIuODYwMSAyNS4xMTktNy44MTk5IDM3LjE1LTE4LjI0IDAuNDYwMDEgMCAxLjAwMDEgMC4wODkgMS40NjA2IDAuMTIwNTgtMC4zMzAyMyAzLjU2MDEtMS4wOTA2IDYuNTU5OC01LjAwMDQgMTIuNDYgOS41Mjk4LTEuMzIgMTQuNzIxLTUuODAwNiAxNy41MzktMTEuNjcxIDguODg2MiAwLjk1MzE0IDE1LjgzNiA2Ljc4NSAyMS4yNiAxNC44MTggMS45MjgtMTUuMjExLTQuNDc2Ni0yNi42LTE5LjgwNy0zNC4wMzYgMS40MTY3LTIuNjk3NCA4LjAxNDMtMTEuOTI1IDE3LjY2MS0xNS43MjEtMS40MjQtMC4yODU2OS0yLjg4ODMtMC40OTQ4Ni00LjQwMzMtMC42MTEyNS01LjcxLTAuNDE5OTItMTMuNjItMC45OTk4Mi0yNC44OSA0LjE3MDMgMi44NTAxLTguNTEwMSAxMC4yMS0xMSAxOC4wNS0xMy4xMi0xNS4xMzEtMS4yNTAxLTI4LjYxLTIuNTg5OC00MC41MyA4LjE4MDEtMS44OTk3LTYuMjEtMC4xODA1NS0xMi41NCAzLjc4ODktMTcuNTJ6IiBzdHlsZT0iZmlsbDojMDBmZmZkOyIvPjxwYXRoIGQ9Im0xNzIuNjMgNjkuOTU0YzEuMjI5MiAxNC4wNjQgMC45Mzg0MSAyOS45NiAwLjM0NjM1IDQ1LjE2OSAxLjc4ODcgNi43OTYgMy4wMzc5IDEzLjIzNSAzLjg4NDIgMTguMzg4bDAuMTM5NzMtMC4wMTFjMS4wMDAxIDYuNTYgMi4zNTk3IDEzLjE4IDMuMjY5OCAxOS43MyAyLjAwMDItNi41Njk5IDIuNTMwMy0xOC4yNSAzLjI0MDUtMjUuNDMgMS4yNTk3LTEzIDEuODI5Ni0yOS4zMTEtMC40MzAxNy00MS45MzEtMC44NTA0MS00LjcyLTIuMDAwNy03LjY4OTYtMi4wMDA3LTguNDc5NiA0LjYyMDUgMy41NjAxIDguNjYwNiA5LjIyMDQgMTMuMDAxIDE0LjE1LTAuNjc1MS0zLjQzMTgtMS4zNDctNi42MDA0LTIuMDU2Ny05LjUyNzMtNC4wNDctNS43MTgzLTEzLjcyNi0xMi4xNTQtMTkuMzkzLTEyLjA2eiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtMTU3Ljk3IDM0LjQ3MWMtMTAuMzM5IDIuNzU3OS0xNy43MTUgMTMuNTQzLTE5LjEzMiAxNi4yNCAxNS4zMyA3LjQzNjEgMjAuNzgzIDE3Ljk2IDIxLjI3OCAzMy41MTcgNS45NTM0IDguODE3OSAxMC4wNjYgMjAuMjg5IDEyLjg1NyAzMC44OTUgMC44NzYzNi0xMy4xNzggMS44MTg2LTI3LjcyNiAwLjI2NTY2LTQ0LjI4IDIuNTY5OCAwLjQ0ODU3IDkuMTM3MiAxLjM5MzQgMTguNzgxIDExLjE3LTIuMTE1OC04LjczMjEtNC41NjcxLTE1LjMxLTguNDUzOS0yMC4yODMtNC41NTk4LTUuODQwMS0xMC45OTktMTAuNDMxLTIzLjgwOS0xMyA5LjY1MDItMy4zNCAxNi4yNy0wLjc2OTkzIDI1LjUgMi4xMzAxLTguMTM4OC03LjQzMTUtMTYuNDc0LTE0LjIxOS0yNy4yODctMTYuMzg5eiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtNjEuNDczIDczLjM1NGMtNy4yNTYtMC43NzUwMS0xMy4wMjQgMi4zNzQ2LTE2LjI2MiA1LjM4NzkgMC43Mzc4OS0wLjQ1NDA5IDEuMzg2OC0wLjc0MjA4IDEuODQ4OS0wLjc0MjA4IDAgMC0xLjUxOTggMTAuMzU5LTEuNjE5NyAxMS41MTktMS41NiAxOS43MyAwLjk5OTU3IDQzLjQwMSA2LjM3IDYyLjQ3MSAxLjMwOTkgNC42ODk5IDEuMTg5NSAzLjA4OTMgMS44ODk4LTAuOTEwNyAxLjc1MjYtMTAuMDYxIDMuMzg5MS0yNC43MDMgNi45NzM5LTM4Ljg2NC01LjA2OC0xNy42MjctNC4yNTA4LTMyLjQwMyAwLjc5OTM3LTM4Ljg2MXoiIHN0eWxlPSJmaWxsOm5vbmU7Ii8+PHBhdGggZD0ibTY5LjA5IDQzLjIxYy0wLjAyNTMgMS4wODAzLThlLTMgMi4xNjEyIDAuMDUyMyAzLjI0MDItMy44NDAyIDAtMTIuNDYgMC43MTk4NC0xNiAyLjE1OTgtNC40NTA0IDEuODAwMS04LjQ4IDUuNDgwMS0xMS42NyAxMS44MyA3LjI5OTktMy45NCAxMS44OTktMy44NTAyIDE2LjY2LTEuODEwMi0xMC4zOSAzLjQ1LTE5LjUyIDExLjM3LTIwLjMyIDI2LjkgMS4xNDU2LTEuNTA1MyA0LjYwNzktNC45Nzg5IDcuMTM5My02LjYyODUgMC4wOS0wLjA1ODcgMC4xNzQyNy0wLjEwNTU2IDAuMjYxNjctMC4xNTk0NiAzLjcxNDEtMi4zMjExIDkuMDQ5NC01LjEyNDcgMTUuMTgxLTQuOTU1My01LjA1MDEgNi40NTc3LTYuNjgyNCAyMC40MzQgMC4yODIwNyAzOC40MjggMS43ODY2LTcuMDU2NyA0LjA1NzQtMTMuOTk0IDcuMDY4MS0yMC4xODQtMWUtMyAtMTEuNjY0IDIuMDc2NC0yNy43NzQgMTUuMzkxLTMzLjU4NS03LjA1MDgtMi4xNTM4LTEyLjcwOS03Ljk5MS0xNC4wNDMtMTUuMjM2eiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtMTQ1LjM5IDEwNC43LTExLjUyIDExLjJoMTcuMjZtLTY1LjUyLTExLjIgMTEuNTIgMTEuMmgtMTcuMjYiIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS13aWR0aDo1LjQ5OThweDtzdHJva2U6IzAwMDsiLz48cGF0aCBkPSJtMTE1LjY4IDE2MC42NGM3LjA4IDAgMTMuMTEtNC45MyAxNS40Ni0xMS44NGEyLjE0IDIuMTQgMCAwIDAtMS41MS0yLjYxMDEgMi4zIDIuMyAwIDAgMC0wLjczOTk1LTAuMDU5M2gtMjYuNDJhMi4xMiAyLjEyIDAgMCAwLTIuMzEgMS45MDk5IDEuODUgMS44NSAwIDAgMCAwLjA1OTMgMC43Mzk5NWMyLjM0MDEgNi45MzAxIDguMzgwMiAxMS44NiAxNS40NiAxMS44NnoiIHN0eWxlPSJmaWxsOiNmZjAwMDA7Ii8+PC9zdmc+\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -189,13 +199,43 @@
 			"response": []
 		},
 		{
+			"name": "get-ann-byid",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\":\"bash\",\r\n   \"email\": \"bastian.bastias@gmail.com\",\r\n   \"password\":\"test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/announcement/65ef998fca59db11555c1ff8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"announcement",
+						"65ef998fca59db11555c1ff8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"username\":\"test1\",\r\n   \"password\":\"test12344\"\r\n}",
+					"raw": "{\r\n   \"username\":\"testUser\",\r\n   \"password\":\"test1234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -218,6 +258,16 @@
 		{
 			"name": "allusers",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -236,17 +286,56 @@
 		{
 			"name": "user",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/auth/user/65bfc7af84ef0ccd2c868c06",
+					"raw": "{{url}}/auth/user/65f99d87142572a2b9350887",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"auth",
 						"user",
-						"65bfc7af84ef0ccd2c868c06"
+						"65f99d87142572a2b9350887"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/user/65f99d87142572a2b9350887",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"user",
+						"65f99d87142572a2b9350887"
 					]
 				}
 			},
@@ -255,11 +344,21 @@
 		{
 			"name": "add-msg",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from\":\"65bfc7af84ef0ccd2c868c06\",\r\n    \"to\":\"65bfc9a574e8d96788df6389\",\r\n    \"message\":\"test message\"\r\n}",
+					"raw": "{\r\n    \"from\":\"65d5421c8d9fae5fec125846\",\r\n    \"to\":\"65f78c4cd2ad73ad5eca86fd\",\r\n    \"message\":\"test message 23\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -282,11 +381,21 @@
 		{
 			"name": "get-msg",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"from\":\"65cccda6e7bd96d437bad96a\",\r\n    \"to\":\"65ccce07e7bd96d437bad970\"\r\n}",
+					"raw": "{\r\n    \"from\":\"65d5421c8d9fae5fec125846\",\r\n    \"to\":\"65ccce07e7bd96d437bad970\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -305,6 +414,149 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en,es;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY5OWQ4NzE0MjU3MmEyYjkzNTA4ODciLCJwcm9maWxlIjoxLCJpYXQiOjE3MTI0MTg3ODksImV4cCI6MTcxMjUwNTE4OX0.BkDP1sy2n8vz2WuSqfc2RzN8Od5omZVGpMvBga57Fos"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:3000/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"123\", \"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"123\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": \"65f99d87142572a2b9350887\",\r\n    \"username\": \"bash2\",\r\n    \"email\": \"bastian.bastias@gmail.com\",\r\n    \"avatarImage\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzEgMjMxIj48cGF0aCBkPSJNMzMuODMsMzMuODNhMTE1LjUsMTE1LjUsMCwxLDEsMCwxNjMuMzQsMTE1LjQ5LDExNS40OSwwLDAsMSwwLTE2My4zNFoiIHN0eWxlPSJmaWxsOiM4YWNmMDA7Ii8+PHBhdGggZD0ibTExNS41IDUxLjc1YTYzLjc1IDYzLjc1IDAgMCAwLTEwLjUgMTI2LjYzdjE0LjA5YTExNS41IDExNS41IDAgMCAwLTUzLjcyOSAxOS4wMjcgMTE1LjUgMTE1LjUgMCAwIDAgMTI4LjQ2IDAgMTE1LjUgMTE1LjUgMCAwIDAtNTMuNzI5LTE5LjAyOXYtMTQuMDg0YTYzLjc1IDYzLjc1IDAgMCAwIDUzLjI1LTYyLjg4MSA2My43NSA2My43NSAwIDAgMC02My42NS02My43NSA2My43NSA2My43NSAwIDAgMC0wLjA5OTYxIDB6IiBzdHlsZT0iZmlsbDojREVBNTYxOyIvPjxwYXRoIGQ9Im0xNDEuODkgMTk1YTExNC43OSAxMTQuNzkgMCAwIDEgMzggMTYuNSAxMTUuNTUgMTE1LjU1IDAgMCAxLTEyOC40NyAwIDExNC43OSAxMTQuNzkgMCAwIDEgMzgtMTYuNWwxNS43NSAxNS43NWgyMXoiIHN0eWxlPSJmaWxsOiMwRDIwNEE7Ii8+PHBhdGggZD0ibTE0Ni40IDE5Ni4xNC0xNy40IDE3LjQ0LTEuMTcgMS4xN2gtMjQuMzRsLTEuMTgtMS4xNy0xNy40My0xNy40NGMxLjQ5LTAuNDEgMy0wLjc5IDQuNTEtMS4xNGw0LjY3LTEgMTIuNzQgMTIuNzRoMTcuNjlsMTIuNzMtMTIuNzQgNC42NyAxYzEuNTIgMC4zNSAzIDAuNzMgNC41MSAxLjE0eiIgc3R5bGU9ImZpbGw6IzAwZmZkZjsiLz48cGF0aCBkPSJtMTA5Ljk5IDE1LjU3Yy0xMy40NiAzLjYzMDEtMTkuNzg5IDExLjk1LTI0LjA2OSAyNC4wOC02Ljk5OTYtNy04LjczMDctMTAuODItNy41NjA2LTIxLjQzYTQxIDQxIDAgMCAwLTkuMjY5OCAyNC45ODhjMC4wMzY2IDcuNjc3NiA1LjY0NjIgMTMuOTM5IDEyLjY5NyAxNS4yOTctMTMuMzE1IDUuODEwNi0xNS4yNTggMjIuMDMzLTE0LjA0NSAzMy41MjQgNS43Njg3LTExLjg2MSAxNC4yNTQtMjAuOTgxIDI3LjI1OC0yMi45NTEtMC40MzAxNyA2LjYtMi41MDk5IDEwLjIyLTcuMjkgMTcuNjYgMTguMjktMi44NjAxIDI1LjExOS03LjgxOTkgMzcuMTUtMTguMjQgMC40NjAwMSAwIDEuMDAwMSAwLjA4OSAxLjQ2MDYgMC4xMjA1OC0wLjMzMDIzIDMuNTYwMS0xLjA5MDYgNi41NTk4LTUuMDAwNCAxMi40NiA5LjUyOTgtMS4zMiAxNC43MjEtNS44MDA2IDE3LjUzOS0xMS42NzEgOC44ODYyIDAuOTUzMTQgMTUuODM2IDYuNzg1IDIxLjI2IDE0LjgxOCAxLjkyOC0xNS4yMTEtNC40NzY2LTI2LjYtMTkuODA3LTM0LjAzNiAxLjQxNjctMi42OTc0IDguMDE0My0xMS45MjUgMTcuNjYxLTE1LjcyMS0xLjQyNC0wLjI4NTY5LTIuODg4My0wLjQ5NDg2LTQuNDAzMy0wLjYxMTI1LTUuNzEtMC40MTk5Mi0xMy42Mi0wLjk5OTgyLTI0Ljg5IDQuMTcwMyAyLjg1MDEtOC41MTAxIDEwLjIxLTExIDE4LjA1LTEzLjEyLTE1LjEzMS0xLjI1MDEtMjguNjEtMi41ODk4LTQwLjUzIDguMTgwMS0xLjg5OTctNi4yMS0wLjE4MDU1LTEyLjU0IDMuNzg4OS0xNy41MnoiIHN0eWxlPSJmaWxsOiMwMGZmZmQ7Ii8+PHBhdGggZD0ibTE3Mi42MyA2OS45NTRjMS4yMjkyIDE0LjA2NCAwLjkzODQxIDI5Ljk2IDAuMzQ2MzUgNDUuMTY5IDEuNzg4NyA2Ljc5NiAzLjAzNzkgMTMuMjM1IDMuODg0MiAxOC4zODhsMC4xMzk3My0wLjAxMWMxLjAwMDEgNi41NiAyLjM1OTcgMTMuMTggMy4yNjk4IDE5LjczIDIuMDAwMi02LjU2OTkgMi41MzAzLTE4LjI1IDMuMjQwNS0yNS40MyAxLjI1OTctMTMgMS44Mjk2LTI5LjMxMS0wLjQzMDE3LTQxLjkzMS0wLjg1MDQxLTQuNzItMi4wMDA3LTcuNjg5Ni0yLjAwMDctOC40Nzk2IDQuNjIwNSAzLjU2MDEgOC42NjA2IDkuMjIwNCAxMy4wMDEgMTQuMTUtMC42NzUxLTMuNDMxOC0xLjM0Ny02LjYwMDQtMi4wNTY3LTkuNTI3My00LjA0Ny01LjcxODMtMTMuNzI2LTEyLjE1NC0xOS4zOTMtMTIuMDZ6IiBzdHlsZT0iZmlsbDpub25lOyIvPjxwYXRoIGQ9Im0xNTcuOTcgMzQuNDcxYy0xMC4zMzkgMi43NTc5LTE3LjcxNSAxMy41NDMtMTkuMTMyIDE2LjI0IDE1LjMzIDcuNDM2MSAyMC43ODMgMTcuOTYgMjEuMjc4IDMzLjUxNyA1Ljk1MzQgOC44MTc5IDEwLjA2NiAyMC4yODkgMTIuODU3IDMwLjg5NSAwLjg3NjM2LTEzLjE3OCAxLjgxODYtMjcuNzI2IDAuMjY1NjYtNDQuMjggMi41Njk4IDAuNDQ4NTcgOS4xMzcyIDEuMzkzNCAxOC43ODEgMTEuMTctMi4xMTU4LTguNzMyMS00LjU2NzEtMTUuMzEtOC40NTM5LTIwLjI4My00LjU1OTgtNS44NDAxLTEwLjk5OS0xMC40MzEtMjMuODA5LTEzIDkuNjUwMi0zLjM0IDE2LjI3LTAuNzY5OTMgMjUuNSAyLjEzMDEtOC4xMzg4LTcuNDMxNS0xNi40NzQtMTQuMjE5LTI3LjI4Ny0xNi4zODl6IiBzdHlsZT0iZmlsbDpub25lOyIvPjxwYXRoIGQ9Im02MS40NzMgNzMuMzU0Yy03LjI1Ni0wLjc3NTAxLTEzLjAyNCAyLjM3NDYtMTYuMjYyIDUuMzg3OSAwLjczNzg5LTAuNDU0MDkgMS4zODY4LTAuNzQyMDggMS44NDg5LTAuNzQyMDggMCAwLTEuNTE5OCAxMC4zNTktMS42MTk3IDExLjUxOS0xLjU2IDE5LjczIDAuOTk5NTcgNDMuNDAxIDYuMzcgNjIuNDcxIDEuMzA5OSA0LjY4OTkgMS4xODk1IDMuMDg5MyAxLjg4OTgtMC45MTA3IDEuNzUyNi0xMC4wNjEgMy4zODkxLTI0LjcwMyA2Ljk3MzktMzguODY0LTUuMDY4LTE3LjYyNy00LjI1MDgtMzIuNDAzIDAuNzk5MzctMzguODYxeiIgc3R5bGU9ImZpbGw6bm9uZTsiLz48cGF0aCBkPSJtNjkuMDkgNDMuMjFjLTAuMDI1MyAxLjA4MDMtOGUtMyAyLjE2MTIgMC4wNTIzIDMuMjQwMi0zLjg0MDIgMC0xMi40NiAwLjcxOTg0LTE2IDIuMTU5OC00LjQ1MDQgMS44MDAxLTguNDggNS40ODAxLTExLjY3IDExLjgzIDcuMjk5OS0zLjk0IDExLjg5OS0zLjg1MDIgMTYuNjYtMS44MTAyLTEwLjM5IDMuNDUtMTkuNTIgMTEuMzctMjAuMzIgMjYuOSAxLjE0NTYtMS41MDUzIDQuNjA3OS00Ljk3ODkgNy4xMzkzLTYuNjI4NSAwLjA5LTAuMDU4NyAwLjE3NDI3LTAuMTA1NTYgMC4yNjE2Ny0wLjE1OTQ2IDMuNzE0MS0yLjMyMTEgOS4wNDk0LTUuMTI0NyAxNS4xODEtNC45NTUzLTUuMDUwMSA2LjQ1NzctNi42ODI0IDIwLjQzNCAwLjI4MjA3IDM4LjQyOCAxLjc4NjYtNy4wNTY3IDQuMDU3NC0xMy45OTQgNy4wNjgxLTIwLjE4NC0xZS0zIC0xMS42NjQgMi4wNzY0LTI3Ljc3NCAxNS4zOTEtMzMuNTg1LTcuMDUwOC0yLjE1MzgtMTIuNzA5LTcuOTkxLTE0LjA0My0xNS4yMzZ6IiBzdHlsZT0iZmlsbDpub25lOyIvPjxwYXRoIGQ9Im0xNjEuNzMgODYuMDE2aC05Mi41MWMtMy4zNyAwLTYuMDAwMSAyLjM5OTgtNi4wMDAxIDUuMjk5OXYyOC40NWMwIDMuMDAwMiAyLjc0IDUuMzAwMSA2LjAwMDEgNS4zMDAxaDMyLjM2YzcuMDkwMSAwIDcuNDQtMTkuNDMgMTMuODItMTkuNDNzNi44ODAxIDE5LjQ0IDEzLjgzIDE5LjQ0aDMyLjM2YzMuMzcgMCA1Ljk5OTktMi40IDUuOTk5OS01LjMwMDF2LTI4LjQ2YzAuMTQwNDMtMi45MDAxLTIuNi01LjI5OTktNS45LTUuMjk5OXoiIHN0eWxlPSJmaWxsOiMxZjI2NDQ7Ii8+PHBhdGggZD0ibTE2MS43MyA4Ni4wMTZoLTkyLjUxYy0zLjM3IDAtNi4wMDAxIDIuMzk5OC02LjAwMDEgNS4yOTk5djI4LjQ1bDEwNC41NS0yOC40NWMwLTIuOTAwMS0yLjc0LTUuMjk5OS01Ljk5OTktNS4yOTk5eiIgc3R5bGU9ImZpbGw6IzliOTdjZTsiLz48cGF0aCBkPSJtMTYxLjczIDg2LjAxNmgtOTIuNTFjLTMuMzcgMC02LjAwMDEgMi4zOTk4LTYuMDAwMSA1LjI5OTl2MjguNDVjMCAzLjAwMDIgMi43NCA1LjMwMDEgNi4wMDAxIDUuMzAwMWgzMi4zNmM3LjA5MDEgMCA3LjQ0LTE5LjQzIDEzLjgyLTE5LjQzczYuODgwMSAxOS40NCAxMy44MyAxOS40NGgzMi4zNmMzLjM3IDAgNS45OTk5LTIuNCA1Ljk5OTktNS4zMDAxdi0yOC40NmMwLjE0MDQzLTIuOTAwMS0yLjYtNS4yOTk5LTUuOS01LjI5OTl6IiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NC4wMDI2cHg7c3Ryb2tlOiMzMDFlMTk7Ii8+PHBhdGggZD0ibTExOC41NyAxNjUuMTRhOC42NiA4LjY2IDAgMCAwLTIuNzYtNC4yM2gtMC42MmE4IDggMCAwIDAtMi43NiA0LjIyYy0wLjUyIDEuODkgMi4wNyAxMC42MSAyLjc2IDEyLjUzaDAuNjJjMC42NC0xLjc2IDMuMTktMTAuODIgMi43Ni0xMi41MnoiIHN0eWxlPSJmaWxsOiMxOTE5MTk7Ii8+PHBhdGggZD0ibTEwMi44MSAxNTIuMjRhMi40OTIxIDIuNDkyMSAwIDEgMSAxLjE5LTQuODRsMC4yMSAwLjA2YTM3LjEgMzcuMSAwIDAgMCA1LjQzIDEuMTIgNDQuNTIgNDQuNTIgMCAwIDAgMTEuNzYgMCAzNy4xIDM3LjEgMCAwIDAgNS40My0xLjEyIDIuNDkwMyAyLjQ5MDMgMCAwIDEgMS41OSA0LjcybC0wLjIxIDAuMDZhNDMuMDggNDMuMDggMCAwIDEtNi4xNSAxLjI5IDQ4LjU1IDQ4LjU1IDAgMCAxLTEzLjA4IDAgNDIuNzkgNDIuNzkgMCAwIDEtNi4xNy0xLjI5eiIgc3R5bGU9ImZpbGw6IzE5MTkxOTsiLz48L3N2Zz4=\",\r\n    \"firstName\": \"Bastian\",\r\n    \"lastName\": \"Bastias\",\r\n    \"profileId\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/user/%2265f99d87142572a2b9350887%22",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"user",
+						"%2265f99d87142572a2b9350887%22"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"const loginEndpoint =pm.environment.get('url')+'/auth/login';\r",
+					"//console.log(loginEndpoint)\r",
+					"const credentials = {\r",
+					"  username: 'adminUser',\r",
+					"  password: 'test1234'\r",
+					"};\r",
+					"\r",
+					"pm.sendRequest({\r",
+					"  url: loginEndpoint,\r",
+					"  method: 'POST',\r",
+					"  header: 'Content-Type:application/json',\r",
+					"  body: {\r",
+					"    mode: 'raw',\r",
+					"    raw: JSON.stringify(credentials)\r",
+					"  }\r",
+					"}, (error, response) => {\r",
+					"  if (error) {\r",
+					"    console.error('Error logging in:', error);\r",
+					"  } else {\r",
+					"    //console.log(response)\r",
+					"    const responseBody = JSON.parse(response.text());\r",
+					"    if (responseBody.token) {\r",
+					"      pm.environment.set('token', responseBody.token);\r",
+					"      console.log(\"token::: \"+responseBody.token)\r",
+					"    } else {\r",
+					"      console.error('No token received');\r",
+					"    }\r",
+					"  }\r",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
