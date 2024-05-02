@@ -1,6 +1,30 @@
-# WeCanChat 
+# WeCanChat chat in real time application
+WeCanChat is a full-stack, real-time chat application built with Node.js and React.js. It allows users to send and receive messages instantly, providing a seamless communication experience.
 
-## chat in real time application
+## High Level Diagram
+
+![Alt text](./imgs/diagram.drawio.png)
+
+## Backend
+The backend server is implemented with Node.js and uses the following libraries:
+
+- *express*: A web application framework for Node.js, used to build the API endpoints.
+- *socket.io*: Enables real-time, bidirectional and event-based communication between the browser and the server.
+- *mongoose*: An Object Data Modeling (ODM) library for MongoDB and Node.js, used to manage relationships between data, provide schema validation, and translate between objects in code and the representation of those objects in MongoDB.
+
+## Frontend 
+The frontend client is built with React.js and uses the following libraries:
+
+- *react-router-dom*: A collection of navigational components that compose declaratively with your application.
+- *socket.io-client*: The client-side library for socket.io, used to establish a connection to the server and send/receive events.
+- *axios*: A promise-based HTTP client for the browser and Node.js, used to make API requests.
+- *react-toastify*: Allows you to add notifications to your app with ease.
+
+## Real-Time Chat
+The real-time chat functionality is implemented using socket.io and socket.io-client. When a user sends a message, the client emits a message event to the server with the message data. The server then broadcasts this event to all other connected clients, which update their state to include the new message, causing the message to appear in the chat UI in real time.
+
+## Getting Started
+To get started with WeCanChat, clone the repository and install the necessary dependencies in both the server and client directories. Then, start the server and client, and navigate to the client URL in your browser. You can now start chatting in real time!
 
 ## Prerequisites
 Make sure you have the following software installed on your machine:
